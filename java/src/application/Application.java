@@ -7,11 +7,9 @@ import java.sql.Statement;
 
 /**
  *
- *
  * Main entry point to the database
  */
-
-class Application {
+public class Application {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost:3306/bikeshop";
     static final String USER = User.username();
@@ -26,26 +24,32 @@ class Application {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             sqlStatement = conn.createStatement();
             Class.forName(JDBC_DRIVER);
-        } catch (SQLException se) {
-            //Handle errors for JDBC
+        }
+
+        //Handle exceptions for JDBC
+        catch (SQLException se) {
             se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
+        }
+        catch (ClassNotFoundException e) {
             e.printStackTrace();
-        } finally {
-            //Finally block used to close resources
+        }
+
+        //Finally block used to close resources
+        finally {
             try {
                 if (sqlStatement != null) {
                     sqlStatement.close();
                 }
-            } catch (SQLException se) {
+            }
+            catch (SQLException se) {
                 se.printStackTrace();
             }
             try {
                 if (conn != null) {
                     conn.close();
                 }
-            } catch (SQLException se) {
+            }
+            catch (SQLException se) {
                 se.printStackTrace();
             }
         }
