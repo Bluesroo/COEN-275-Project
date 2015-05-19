@@ -8,6 +8,8 @@ import java.sql.Statement;
 /**
  *
  * Main entry point to the database
+ *
+ * @author Joseph pariseau
  */
 public class Application {
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";

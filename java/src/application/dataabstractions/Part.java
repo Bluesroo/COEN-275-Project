@@ -1,7 +1,7 @@
-package application;
+package application.dataabstractions;
 
 /**
- * Created by Mugen on 5/15/15.
+ * @author David Obatake
  */
 public class Part extends Labor{
     protected String manufacturer;

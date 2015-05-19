@@ -1,4 +1,4 @@
-package application;
+package application.dataabstractions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Created by Mugen on 5/15/15.
+ * @author David Obatake
  */
 public class Order {
     private static int tag;

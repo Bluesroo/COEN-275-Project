@@ -1,9 +1,9 @@
-package application;
+package application.dataabstractions;
 
 import java.util.ArrayList;
 
 /**
- * Created by Mugen on 5/16/15.
+ * @author David Obatake
  */
 public class Customer {
     private String name;
