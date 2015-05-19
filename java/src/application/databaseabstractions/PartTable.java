@@ -3,7 +3,7 @@ package application.databaseabstractions;
 /**
  * @author Joseph Pariseau
  */
-public class customerTable extends abstractTable {
+public class PartTable extends abstractTable {
     @Override
     public boolean addItem(Object customer) {
         return true;
