@@ -1,9 +1,9 @@
-package application;
+package application.databaseabstractions;
 
 /**
  * @author Joseph Pariseau
  */
-public abstract class AbstractTableaslkdjfhasd {
+public abstract class AbstractTable {
     int rowCount;
     int columnCount;
     public abstract boolean addItem(Object item);
