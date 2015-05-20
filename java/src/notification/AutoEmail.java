@@ -7,7 +7,7 @@ import javax.mail.internet.*;
 import javax.activation.*;
 
 /**
- * Created by Mugen on 5/16/15.
+ * @author Mugen on 5/16/15.
  *
  * Modified from http://crunchify.com/java-mailapi-example-send-an-email-via-gmail-smtp/
  */

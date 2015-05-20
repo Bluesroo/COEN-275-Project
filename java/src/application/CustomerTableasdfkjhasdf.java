@@ -1,9 +1,9 @@
-package application.databaseabstractions;
+package application;
 
 /**
  * @author Joseph Pariseau
  */
-public class OrderTable extends abstractTable {
+public class CustomerTableasdfkjhasdf extends AbstractTableaslkdjfhasd {
     @Override
     public boolean addItem(Object customer) {
         return true;

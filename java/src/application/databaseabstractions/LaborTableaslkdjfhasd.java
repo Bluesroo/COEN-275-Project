@@ -1,9 +1,11 @@
 package application.databaseabstractions;
 
+import application.AbstractTableaslkdjfhasd;
+
 /**
  * @author Joseph Pariseau
  */
-public class PartTable extends abstractTable {
+public class LaborTableaslkdjfhasd extends AbstractTableaslkdjfhasd {
     @Override
     public boolean addItem(Object customer) {
         return true;
