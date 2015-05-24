@@ -1,0 +1,22 @@
+Generic Queries
+
+Select query:
+SELECT <part of table> FROM <table> WHERE <data from part of table> = <value you want to find>
+
+e.g. SELECT * FROM customers WHERE lastname = 'pariseau';
+e.g. SELECT COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS WHERE table_name = 'orders';
+
+Add query:
+INSERT INTO <table> (tableParam1, tableParam2, etc.) VALUES ('<tableParam1>', '<tableParam2>');
+
+e.g. INSERT INTO parts (parttype, partmanufacturer, price, partname) VALUE ('wheel', 'bob's wheels', 5, 'cool wheel');
+
+Edit Query:
+UPDATE <table> SET <columnName> = '<newValue>' WHERE <columnName> = '<value of row you want to select>';
+
+e.g. UPDATE parts SET price = '10' WHERE partname = 'cool wheels';
+
+Remove Query:
+DELETE FROM <table> WHERE <stuff you wanna delete> LIMIT <number you want to delete>
+
+e.g. DELETE FROM customers WHERE lastname = 'pariseau' LIMIT 1;
