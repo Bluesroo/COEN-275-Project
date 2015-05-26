@@ -55,5 +55,6 @@ final class User {
 
         String password = passwordLine.split("=")[1];
 
-        return password;    }
+        return password;
+    }
 }

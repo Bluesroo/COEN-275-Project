@@ -1,5 +1,7 @@
 package application;
 
+import application.databasegui.TestGui;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -55,5 +57,8 @@ public class Application {
                 se.printStackTrace();
             }
         }
+
+        TestGui test = new TestGui(1280, 720);
+        test.run();
     }
 }
