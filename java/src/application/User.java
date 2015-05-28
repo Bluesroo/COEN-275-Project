@@ -10,7 +10,6 @@ import java.io.FileReader;
  * @author Joseph Pariseau
  */
 final class User {
-
     static final private String PATH_TO_CREDENTIALS = "./resources/.credentials";
 
     static String username() {
@@ -30,9 +29,7 @@ final class User {
             e.printStackTrace();
         }
 
-        String username = usernameLine.split("=")[1];
-
-        return username;
+        return usernameLine.split("=")[1];
     }
 
     static String password() {
@@ -53,8 +50,6 @@ final class User {
             e.printStackTrace();
         }
 
-        String password = passwordLine.split("=")[1];
-
-        return password;
+        return passwordLine.split("=")[1];
     }
 }

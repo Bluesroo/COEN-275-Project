@@ -1,6 +1,6 @@
 package application;
 
-import application.databasegui.TestGui;
+import application.databasegui.DatabaseGui;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -58,7 +58,7 @@ public class Application {
             }
         }
 
-        TestGui test = new TestGui(1280, 720);
+        DatabaseGui test = new DatabaseGui(1280, 720);
         test.run();
     }
 }
