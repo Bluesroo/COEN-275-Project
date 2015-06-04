@@ -10,7 +10,9 @@ import java.util.Date;
  */
 public class Order {
     private static int tag;
+
     private int orderTag;
+    private Customer customer;
     private Date date;
     private double price;
     ArrayList<Labor> items;
@@ -19,12 +21,26 @@ public class Order {
         this.orderTag = tag++;
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         this.date = new Date();
-        items = new ArrayList<Labor>();
+        items = new ArrayList<>();
+    }
+
+    public Order(Customer info){
+        this();
+        this.customer = info;
     }
 
     public int getTag() {
         return orderTag;
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer info) {
+        this.customer = info;
+    }
+
 
     public Date getDate() {
         return date;

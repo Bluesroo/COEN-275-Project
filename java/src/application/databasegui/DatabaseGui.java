@@ -7,7 +7,7 @@ public class DatabaseGui{
     final int WINDOW_HEIGHT;
     final int WINDOW_WIDTH;
     private WindowFrame window;
-    private int columnCount = 10;
+    private int columnCount = 11;
     private int rowCount = 90;
 
     public DatabaseGui(int width, int height) {

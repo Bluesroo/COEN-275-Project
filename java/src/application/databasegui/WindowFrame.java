@@ -21,6 +21,11 @@ public class WindowFrame extends JFrame {
         ContentPanel content = new ContentPanel(rowCount, columnCount);
         JScrollPane contentScroll = new JScrollPane(content);
 
+        PanelController controller = new PanelController();
+        controller.setActionPanel(actions);
+        controller.setContentPanel(content);
+        content.setController(controller);
+
         CONTAINER.add(actions);
         CONTAINER.add(columns);
         CONTAINER.add(contentScroll);

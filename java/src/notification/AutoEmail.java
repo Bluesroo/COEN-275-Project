@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
+import application.dataabstractions.Customer;
 
 /**
  * @author Mugen on 5/16/15.
@@ -17,12 +18,7 @@ public class AutoEmail {
     static Session getMailSession;
     static MimeMessage generateMailMessage;
 
-    public static void main(String args[]) throws AddressException, MessagingException {
-        generateAndSendEmail();
-        System.out.println("\n\n ===> Your Java Program has just sent an Email successfully. Check your email..");
-    }
-
-    public static void generateAndSendEmail() throws AddressException, MessagingException {
+    public static void generateAndSendEmail(Customer c) throws MessagingException {
 
 //Step1 -- Sends message via TLS
         System.out.println("\n 1st ===> setup Mail Server Properties..");
@@ -36,9 +32,9 @@ public class AutoEmail {
         System.out.println("\n\n 2nd ===> get Mail Session..");
         getMailSession = Session.getDefaultInstance(mailServerProperties, null);
         generateMailMessage = new MimeMessage(getMailSession);
-        // @TODO Need to get email recipients from the customer database
-        generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("david.obatake@gmail.com"));
-        generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("jpariseau101@gmail.com"));
+        generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(c.getEmail()));
+        //generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("jpariseau101@gmail.com"));
+
         // @TODO need to check what the email message should be -- May need to include the invoice as an attachment
         generateMailMessage.setSubject("Your repair is ready for pickup");
         String emailBody = "Test email by JavaMail API example. " + "<br><br> Regards, <br>David";

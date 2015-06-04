@@ -14,7 +14,7 @@ public class Customer {
     public Customer(String name, String email) {
         this.name = name;
         this.email = email;
-        this.orders = new ArrayList<Order>();
+        this.orders = new ArrayList<>();
     }
 
     public Customer(String name, String email, String phone) {
@@ -47,5 +47,13 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public boolean equals(Customer c){
+        if(c.getName().equals(this.name) &&
+                c.getEmail().equals(this.email))
+            return true;
+
+        return false;
     }
 }
