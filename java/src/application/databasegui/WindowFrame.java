@@ -16,10 +16,10 @@ public class WindowFrame extends JFrame {
     public void run(int rowCount, int columnCount) {
         CONTAINER.removeAll();
 
-        ActionPanel actions = new ActionPanel();
         ColumnPanel columns = new ColumnPanel(columnCount);
         ContentPanel content = new ContentPanel(rowCount, columnCount);
         JScrollPane contentScroll = new JScrollPane(content);
+        ActionPanel actions = new ActionPanel(columns, content);
 
         CONTAINER.add(actions);
         CONTAINER.add(columns);
