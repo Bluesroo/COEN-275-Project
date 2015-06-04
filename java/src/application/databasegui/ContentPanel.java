@@ -1,16 +1,26 @@
 package application.databasegui;
 
+import application.dataabstractions.Customer;
+import application.dataabstractions.Order;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 /**
  * @author Joseph Pariseau
  */
-public class ContentPanel extends JPanel implements ActionListener {
+public class ContentPanel extends JPanel implements ActionListener, ItemListener {
     final private int COLUMN_COUNT;
     final private int ROW_COUNT;
+
+    private ArrayList<Customer> emailList;
+    private ArrayList<Order> orders;
 
     ContentPanel(int rowCount, int columnCount) {
         ROW_COUNT = rowCount;
@@ -47,6 +57,22 @@ public class ContentPanel extends JPanel implements ActionListener {
             case "Search":
                 System.out.println("Search");
                 break;
+        }
+    }
+
+    public void itemStateChanged(ItemEvent e) {
+        Object src = e.getItemSelectable();
+        int oTag = Integer.parseInt(((JCheckBox) src).getText());
+        Customer temp = null;
+        for (Order o : orders)
+            if (o.getTag() == oTag)
+                temp = o.getCustomer();
+
+        if(e.getStateChange() == ItemEvent.DESELECTED){
+            emailList.remove(temp);
+        }
+        else if (e.getStateChange() == ItemEvent.SELECTED){
+            emailList.add(temp);
         }
     }
 }
