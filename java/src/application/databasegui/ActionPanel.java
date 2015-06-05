@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class ActionPanel extends JPanel {
 
 
-    ActionPanel(ColumnPanel columns, ContentPanel content) {
+    ActionPanel() {
         setBackground(Color.RED);
 
         JButton newCustomer = new JButton("New Customer");
@@ -19,10 +19,10 @@ public class ActionPanel extends JPanel {
         JButton notify = new JButton("Notify");
         JButton search = new JButton("Search");
 
-        newCustomer.addActionListener(content);
-        newRepair.addActionListener(content);
-        notify.addActionListener(content);
-        search.addActionListener(content);
+        /* newCustomer.addActionListener();
+        newRepair.addActionListener();
+        notify.addActionListener();
+        search.addActionListener(); */
 
         add(newCustomer);
         add(newRepair);

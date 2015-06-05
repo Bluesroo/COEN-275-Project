@@ -1,66 +1,77 @@
 package application.databasegui;
 
 import application.dataabstractions.Customer;
+import application.dataabstractions.Labor;
 import application.dataabstractions.Order;
+import application.dataabstractions.Part;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 /**
  * @author Joseph Pariseau
  */
-public class ContentPanel extends JPanel implements ActionListener, ItemListener {
-    final private int COLUMN_COUNT;
-    final private int ROW_COUNT;
+public class ContentPanel extends JPanel {
+    private int columnCount;
+    private int rowCount;
+    private Class state;
 
-    private ArrayList<Customer> emailList;
-    private ArrayList<Order> orders;
-
-    ContentPanel(int rowCount, int columnCount) {
-        ROW_COUNT = rowCount;
-        COLUMN_COUNT = columnCount;
+    ContentPanel() {
         setBackground(Color.BLUE);
-        setLayout(new GridLayout(0, COLUMN_COUNT));
-        setContent();
+        setLayout(new GridLayout(0, columnCount));
     }
 
-    private void setContent() {
-        int j;
-        for (int i = 0; i < ROW_COUNT; i++) {
-            for (j = 0; j < COLUMN_COUNT; j++) {
-                JLabel dataPoint = new JLabel("Data " + (i + 1) + "." + (j + 1));
-                add(dataPoint);
-            }
+    public void setContent(Object array) {
+        removeAll();
+
+        Class arrayClass = array.getClass();
+        boolean setSuccess;
+
+        if (arrayClass.equals(Customer.class)) {
+            setSuccess = setCustomers(array);
+        } else if (arrayClass.equals(Labor.class)) {
+            setSuccess = setLabor(array);
+        } else if (arrayClass.equals(Order.class)) {
+            setSuccess = setOrders(array);
+        } else if (arrayClass.equals(Part.class)) {
+            setSuccess = setParts(array);
+        } else {
+            setSuccess = false;
+            System.out.println("Trying to display invalid array type.");
         }
-    }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        String action = e.getActionCommand();
-
-        switch (action) {
-            case "New Customer":
-                System.out.println("New Customer");
-                break;
-            case "New Repair":
-                System.out.println("New Repair");
-                break;
-            case "Notify":
-                System.out.println("Notify");
-                break;
-            case "Search":
-                System.out.println("Search");
-                break;
+        if (setSuccess) {
+            state = arrayClass;
         }
+        System.out.println("Current display: " + state.toString());
     }
 
-    public void itemStateChanged(ItemEvent e) {
+    private boolean setCustomers(Object array) {
+        return true;
+    }
+
+    private boolean setLabor(Object array) {
+        return true;
+    }
+
+    private boolean setOrders(Object array) {
+        return true;
+    }
+
+    private boolean setParts(Object array) {
+        return true;
+    }
+
+    private void setColumnCount(Object array) {
+
+    }
+
+    private void setRowCount(Object array) {
+
+    }
+
+    /* public void itemStateChanged(ItemEvent e) {
         Object src = e.getItemSelectable();
         int oTag = Integer.parseInt(((JCheckBox) src).getText());
         Customer temp = null;
@@ -74,5 +85,5 @@ public class ContentPanel extends JPanel implements ActionListener, ItemListener
         else if (e.getStateChange() == ItemEvent.SELECTED){
             emailList.add(temp);
         }
-    }
+    } */
 }

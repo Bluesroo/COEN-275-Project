@@ -13,13 +13,13 @@ public class WindowFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    public void run(int rowCount, int columnCount) {
+    public void run() {
         CONTAINER.removeAll();
 
-        ColumnPanel columns = new ColumnPanel(columnCount);
-        ContentPanel content = new ContentPanel(rowCount, columnCount);
-        JScrollPane contentScroll = new JScrollPane(content);
-        ActionPanel actions = new ActionPanel(columns, content);
+        ColumnPanel columns = new ColumnPanel();
+        ContentPanel content = new ContentPanel();
+        JScrollPane contentScroll = new JScrollPane();
+        ActionPanel actions = new ActionPanel();
 
         CONTAINER.add(actions);
         CONTAINER.add(columns);

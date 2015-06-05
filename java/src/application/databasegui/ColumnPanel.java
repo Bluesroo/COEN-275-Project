@@ -8,8 +8,9 @@ import java.awt.*;
  */
 public class ColumnPanel extends JPanel {
     final private int COLUMN_COUNT;
+    int columnCount = 10;
 
-    ColumnPanel(int columnCount) {
+    ColumnPanel() {
         COLUMN_COUNT = columnCount;
         setBackground(Color.GREEN);
         setLayout(new GridLayout(1, 0));
