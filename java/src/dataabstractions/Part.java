@@ -6,6 +6,8 @@ package dataabstractions;
 public class Part extends Labor implements ShopData{
     protected String manufacturer;
 
+    public Part() {};
+
     public Part(String name, double price, String manufacturer) {
         this.name = name;
         this.price = price;

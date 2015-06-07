@@ -1,5 +1,6 @@
 package dataabstractions;
 
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class Order implements ShopData{
         this.date = new Date();
         items = new ArrayList<>();
     }
+
+    public Order(int tag) {this.orderTag = tag; }
 
     public Order(Customer info){
         this();
@@ -53,7 +56,7 @@ public class Order implements ShopData{
     public void updatePrice() {
         for(Labor l : items) {
             // Reset price
-            price = 0;
+            price = 0.0;
             // then add all prices of items together
             price += l.getPrice();
 

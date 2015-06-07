@@ -1,5 +1,7 @@
 package dataabstractions;
 
+import java.math.BigDecimal;
+
 /**
  * @author David Obatake
  */
@@ -14,7 +16,7 @@ public class Labor implements ShopData {
         this.price = 0.0;
     }
 
-    public Labor(String name, float price) {
+    public Labor(String name, double price) {
         this.name = name;
         this.price = price;
     }
