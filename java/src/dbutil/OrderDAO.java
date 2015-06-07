@@ -1,5 +1,6 @@
 package dbutil;
 
+import dataabstractions.Labor;
 import dataabstractions.Order;
 import dataabstractions.ShopData;
 
@@ -24,8 +25,12 @@ public class OrderDAO {
         stmt = conn.createStatement();
         rs = stmt.executeQuery(query);
         if(rs.next()) {
-            Order o = new Order();
-            o.setTag
+            Order o = new Order(rs.getInt("order_id"));
+            PartDAO p = new PartDAO();
+            p.setFromDB(conn, o.getTag());
+            int numItems = p.getData().size();
+            for(int i = 0; i < numItems; i++)
+                o.addItem((Labor) p.getData().get(i));
             orderData.add(o);
         }
     }
