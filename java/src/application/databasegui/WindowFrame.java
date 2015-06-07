@@ -1,31 +1,37 @@
 package application.databasegui;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 /**
  * @author Joseph Pariseau
  */
 public class WindowFrame extends JFrame {
     final private JPanel CONTAINER = new JPanel();
+    final ContentPanel CONTENT = new ContentPanel();
+    final JScrollPane CONTENT_SCROLL = new JScrollPane(CONTENT);
+    final ActionPanel ACTION_FRAME = new ActionPanel();
 
     WindowFrame() {
         setTitle("SCBS Repair Tracker");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    public void run() {
+    public void initialize() {
         CONTAINER.removeAll();
 
-        ColumnPanel columns = new ColumnPanel();
-        ContentPanel content = new ContentPanel();
-        JScrollPane contentScroll = new JScrollPane();
-        ActionPanel actions = new ActionPanel();
-
-        CONTAINER.add(actions);
-        CONTAINER.add(columns);
-        CONTAINER.add(contentScroll);
+        CONTAINER.add(ACTION_FRAME);
+        CONTAINER.add(CONTENT_SCROLL);
 
         CONTAINER.setLayout(new BoxLayout(CONTAINER, BoxLayout.PAGE_AXIS));
         setContentPane(CONTAINER);
+    }
+
+    void setActionListeners(ActionListener[] listeners) {
+        ACTION_FRAME.setActionBarListeners(listeners);
+    }
+
+    public void setContent(Object array) {
+        CONTENT.setContent(array);
     }
 }

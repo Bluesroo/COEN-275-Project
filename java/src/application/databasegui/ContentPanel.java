@@ -7,7 +7,6 @@ import application.dataabstractions.Part;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemEvent;
 
 /**
  * @author Joseph Pariseau
@@ -22,7 +21,7 @@ public class ContentPanel extends JPanel {
         setLayout(new GridLayout(0, columnCount));
     }
 
-    public void setContent(Object array) {
+    boolean setContent(Object array) {
         removeAll();
 
         Class arrayClass = array.getClass();
@@ -37,26 +36,30 @@ public class ContentPanel extends JPanel {
         } else if (arrayClass.equals(Part.class)) {
             setSuccess = setParts(array);
         } else {
-            setSuccess = false;
             System.out.println("Trying to display invalid array type.");
+            setSuccess = false;
         }
 
         if (setSuccess) {
             state = arrayClass;
         }
+
         System.out.println("Current display: " + state.toString());
+        return setSuccess;
+
     }
 
     private boolean setCustomers(Object array) {
+        System.out.println(rowCount);
         return true;
     }
 
     private boolean setLabor(Object array) {
-        return true;
+        return false;
     }
 
     private boolean setOrders(Object array) {
-        return true;
+        return false;
     }
 
     private boolean setParts(Object array) {
@@ -64,26 +67,14 @@ public class ContentPanel extends JPanel {
     }
 
     private void setColumnCount(Object array) {
-
+        columnCount = 10;
+        System.out.println(array);
+        System.out.println(columnCount);
     }
 
     private void setRowCount(Object array) {
-
+        rowCount = 10;
+        System.out.println(array);
+        System.out.println(rowCount);
     }
-
-    /* public void itemStateChanged(ItemEvent e) {
-        Object src = e.getItemSelectable();
-        int oTag = Integer.parseInt(((JCheckBox) src).getText());
-        Customer temp = null;
-        for (Order o : orders)
-            if (o.getTag() == oTag)
-                temp = o.getCustomer();
-
-        if(e.getStateChange() == ItemEvent.DESELECTED){
-            emailList.remove(temp);
-        }
-        else if (e.getStateChange() == ItemEvent.SELECTED){
-            emailList.add(temp);
-        }
-    } */
 }
