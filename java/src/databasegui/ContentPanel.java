@@ -12,7 +12,7 @@ import java.awt.*;
  * @author Joseph Pariseau
  */
 public class ContentPanel extends JPanel {
-    private int columnCount;
+    private int columnCount = 10;
     private int rowCount;
     private Class state;
 
