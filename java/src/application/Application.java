@@ -2,6 +2,8 @@ package application;
 
 import application.databasegui.DatabaseGui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -20,43 +22,7 @@ public class Application {
     static final String PASS = User.password();
 
     public static void main(String[] args) {
-        Connection conn = null;
-        Statement sqlStatement = null;
-        DatabaseGui gui = new DatabaseGui(1280, 720, null);
-
-        try {
-            //Connects to the database and prepares to issue a statement
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            sqlStatement = conn.createStatement();
-            Class.forName(JDBC_DRIVER);
-        }
-
-        //Handle exceptions for JDBC
-        catch (SQLException se) {
-            se.printStackTrace();
-        }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        //Finally block used to close resources
-        finally {
-            try {
-                if (sqlStatement != null) {
-                    sqlStatement.close();
-                }
-            }
-            catch (SQLException se) {
-                se.printStackTrace();
-            }
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            }
-            catch (SQLException se) {
-                se.printStackTrace();
-            }
-        }
+        ApplicationRunner app = new ApplicationRunner();
+        app.run(JDBC_DRIVER, DB_URL, USER, PASS);
     }
 }

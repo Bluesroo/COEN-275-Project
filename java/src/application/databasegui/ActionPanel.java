@@ -23,11 +23,11 @@ public class ActionPanel extends JPanel {
         add(search);
     }
 
-    void setActionBarListeners(ActionListener[] listeners) {
-        newCustomer.addActionListener(listeners[0]);
-        newRepair.addActionListener(listeners[1]);
-        notify.addActionListener(listeners[2]);
-        search.addActionListener(listeners[3]);
+    void setActionBarListeners(ActionListener mainListener) {
+        newCustomer.addActionListener(mainListener);
+        newRepair.addActionListener(mainListener);
+        notify.addActionListener(mainListener);
+        search.addActionListener(mainListener);
     }
 
     @Override

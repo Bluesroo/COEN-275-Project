@@ -11,11 +11,11 @@ public class DatabaseGui{
     private final WindowFrame WINDOW = new WindowFrame();
     private int fakeArray [];
 
-    public DatabaseGui(int width, int height, ActionListener [] listeners) {
+    public DatabaseGui(int width, int height, ActionListener mainListener) {
         WINDOW_WIDTH = width;
         WINDOW_HEIGHT = height;
         WINDOW.initialize();
-        WINDOW.setActionListeners(listeners);
+        WINDOW.setActionListeners(mainListener);
         WINDOW.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 

@@ -27,8 +27,8 @@ public class WindowFrame extends JFrame {
         setContentPane(CONTAINER);
     }
 
-    void setActionListeners(ActionListener[] listeners) {
-        ACTION_FRAME.setActionBarListeners(listeners);
+    void setActionListeners(ActionListener mainListener) {
+        ACTION_FRAME.setActionBarListeners(mainListener);
     }
 
     public void setContent(Object array) {
