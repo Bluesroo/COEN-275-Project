@@ -10,7 +10,7 @@ import dataabstractions.Customer;
 import dataabstractions.ShopData;
 
 /**
- * @ Joseph Pariseau
+ * @author Joseph Pariseau
  */
 public class CustomerDAO {
 
