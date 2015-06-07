@@ -16,7 +16,7 @@ public class CustomerDAO {
 
     private static ArrayList<ShopData> customerData = new ArrayList<>();
 
-    public void setFromDB(Connection conn) throws SQLException {
+    public static void setFromDB(Connection conn) throws SQLException {
         String query = "SELECT * FROM customers";
         ResultSet rs;
         Statement stmt = conn.createStatement();

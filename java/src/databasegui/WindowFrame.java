@@ -4,6 +4,7 @@ import dataabstractions.ShopData;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * @author Joseph Pariseau
@@ -33,7 +34,7 @@ public class WindowFrame extends JFrame {
         ACTION_FRAME.setActionBarListeners(mainListener);
     }
 
-    public void setContent(ShopData data) {
+    public void setContent(ArrayList<ShopData> data) {
         CONTENT.setContent(data);
     }
 }

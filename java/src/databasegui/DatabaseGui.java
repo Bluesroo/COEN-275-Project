@@ -3,6 +3,7 @@ package databasegui;
 import dataabstractions.ShopData;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * @author Joseph Pariseau
@@ -21,7 +22,7 @@ public class DatabaseGui{
         WINDOW.setVisible(true);
     }
 
-    public void updateContent (ShopData data) {
+    public void updateContent (ArrayList<ShopData> data) {
         WINDOW.setContent(data);
     }
 }

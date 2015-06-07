@@ -1,7 +1,8 @@
-import dataabstractions.Customer;
 import dataabstractions.ShopData;
 import databasegui.DatabaseGui;
 import dbutil.CustomerDAO;
+import dbutil.OrderDAO;
+import dbutil.PartDAO;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,30 +16,27 @@ import java.util.ArrayList;
  * @author Joseph Pariseau
  */
 public class ApplicationRunner implements ActionListener {
-    void run(String jdbcDriver, String dbUrl, String user, String pass) {
-        Connection conn = null;
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/bikeshop";
+    static final String USER = User.username();
+    static final String PASS = User.password();
+    private Connection conn;
+
+    DatabaseGui gui = new DatabaseGui(1280, 720, this);
+    OrderDAO orderConnection = new OrderDAO();
+    PartDAO partConnection = new PartDAO();
+
+    void run() {
         Statement sqlStatement = null;
-        DatabaseGui gui = new DatabaseGui(1280, 720, this);
 
         try {
             //Connects to the database and prepares to issue a statement
-            conn = DriverManager.getConnection(dbUrl, user, pass);
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
             sqlStatement = conn.createStatement();
-            Class.forName(jdbcDriver);
-            CustomerDAO example = new CustomerDAO();
-            example.setFromDB(conn);
-            ArrayList<ShopData> customerData = CustomerDAO.getData();
-            Customer test = (Customer) customerData.get(0);
-            System.out.println(test.getFirstName());
-        }
-
-        //Handle exceptions for JDBC
-        catch (Exception e) {
+            Class.forName(JDBC_DRIVER);
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        //Finally block used to close resources
-        finally {
+        } finally {
             try {
                 if (sqlStatement != null) {
                     sqlStatement.close();
@@ -53,13 +51,51 @@ public class ApplicationRunner implements ActionListener {
         }
     }
 
+    private ArrayList<ShopData> returnDAOData(String DAO) throws SQLException {
+        switch (DAO) {
+            case "Customer":
+                CustomerDAO.setFromDB(conn);
+                System.out.println(DAO);
+                return CustomerDAO.getData();
+            case "Order":
+                orderConnection.setFromDB(conn);
+                System.out.println(DAO);
+                return OrderDAO.getData();
+            case "Part":
+
+                System.out.println(DAO);
+                break;
+            default:
+                System.out.println("Not a valid action.");
+                break;
+        }
+        return null;
+    }
 
     @Override
     public void actionPerformed(ActionEvent event) {
         String action = event.getActionCommand();
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-        if (action.equals("Notify")) {
-            System.out.println("Notify");
+            switch (action) {
+                case "New Entry":
+                    System.out.println(action);
+                    break;
+                case "Notify":
+                    System.out.println(action);
+                    break;
+                case "Change View":
+                    ArrayList<ShopData> content = returnDAOData("Customer");
+                    gui.updateContent(content);
+                    System.out.println(action);
+                    break;
+                default:
+                    System.out.println("Not a valid action.");
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

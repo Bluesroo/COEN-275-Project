@@ -1,61 +1,44 @@
 package databasegui;
 
-import dataabstractions.Customer;
-import dataabstractions.Labor;
-import dataabstractions.Order;
-import dataabstractions.Part;
+import dataabstractions.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author Joseph Pariseau
  */
 public class ContentPanel extends JPanel {
-    private int columnCount = 10;
+    private int columnCount;
     private int rowCount;
-    private Class state;
 
     ContentPanel() {
         setBackground(Color.BLUE);
-        setLayout(new GridLayout(0, columnCount));
     }
 
-    boolean setContent(Object array) {
+    boolean setContent(ArrayList<ShopData> array) {
         removeAll();
 
-        Class arrayClass = array.getClass();
         boolean setSuccess;
 
-        if (arrayClass.equals(Customer.class)) {
+        if (array.get(0) instanceof Customer) {
             setSuccess = setCustomers(array);
-        } else if (arrayClass.equals(Labor.class)) {
-            setSuccess = setLabor(array);
-        } else if (arrayClass.equals(Order.class)) {
+        } else if (array.get(0) instanceof Order) {
             setSuccess = setOrders(array);
-        } else if (arrayClass.equals(Part.class)) {
+        } else if (array.get(0) instanceof Part) {
             setSuccess = setParts(array);
         } else {
             System.out.println("Trying to display invalid array type.");
             setSuccess = false;
         }
-
-        if (setSuccess) {
-            state = arrayClass;
-        }
-
-        System.out.println("Current display: " + state.toString());
         return setSuccess;
 
     }
 
-    private boolean setCustomers(Object array) {
+    private boolean setCustomers(ArrayList<ShopData> array) {
         System.out.println(rowCount);
         return true;
-    }
-
-    private boolean setLabor(Object array) {
-        return false;
     }
 
     private boolean setOrders(Object array) {

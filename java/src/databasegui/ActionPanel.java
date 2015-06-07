@@ -9,25 +9,25 @@ import java.awt.event.ActionListener;
  * @author Joseph Pariseau
  */
 public class ActionPanel extends JPanel {
-    private JButton newCustomer = new JButton("New Customer");
-    private JButton newRepair = new JButton("New Repair");
+    private JButton newEntry = new JButton("New Entry");
+    private JButton changeView = new JButton("Change View");
     private JButton notify = new JButton("Notify");
-    private JButton search = new JButton("Search");
+    //private JButton search = new JButton("Search");
 
     ActionPanel() {
         setBackground(Color.RED);
 
-        add(newCustomer);
-        add(newRepair);
+        add(newEntry);
+        add(changeView);
         add(notify);
-        add(search);
+        //add(search);
     }
 
     void setActionBarListeners(ActionListener mainListener) {
-        newCustomer.addActionListener(mainListener);
-        newRepair.addActionListener(mainListener);
+        newEntry.addActionListener(mainListener);
+        changeView.addActionListener(mainListener);
         notify.addActionListener(mainListener);
-        search.addActionListener(mainListener);
+        //search.addActionListener(mainListener);
     }
 
     @Override
