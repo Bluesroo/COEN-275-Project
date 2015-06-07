@@ -17,6 +17,7 @@ public class DatabaseGui{
         WINDOW.initialize();
         WINDOW.setActionListeners(mainListener);
         WINDOW.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        WINDOW.setVisible(true);
     }
 
     public void updateContent () {
