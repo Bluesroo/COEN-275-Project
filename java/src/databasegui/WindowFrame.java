@@ -1,5 +1,7 @@
 package databasegui;
 
+import dataabstractions.ShopData;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
@@ -31,7 +33,7 @@ public class WindowFrame extends JFrame {
         ACTION_FRAME.setActionBarListeners(mainListener);
     }
 
-    public void setContent(Object array) {
-        CONTENT.setContent(array);
+    public void setContent(ShopData data) {
+        CONTENT.setContent(data);
     }
 }

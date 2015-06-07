@@ -10,34 +10,28 @@ import dataabstractions.Customer;
 import dataabstractions.ShopData;
 
 /**
- * Created by Mugen on 6/7/15.
+ * @ Joseph Pariseau
  */
 public class CustomerDAO {
 
-    Statement stmt;
+    private static ArrayList<ShopData> customerData = new ArrayList<>();
 
-    public ArrayList<ShopData> getAllCustomers(Connection conn) throws SQLException{
-        ArrayList<ShopData> cList = new ArrayList<>();
+    public void setFromDB(Connection conn) throws SQLException {
         String query = "SELECT * FROM customers";
-        String orderQuery = "SELECT * FROM orders WHERE ";
-        ResultSet rs = null;
-        try {
-            Statement stmt = conn.createStatement();
-            rs = stmt.executeQuery(query);
-            if(rs.next()) {
-                Customer c = new Customer();
-                c.setFirstName(rs.getString("firstname"));
-                c.setLastname(rs.getString("lastname"));
-                c.setEmail(rs.getString("email"));
-                c.setPhone(rs.getString("phone"));
-                cList.add(c);
-            }
-
-        } finally {
-            rs.close();
-            stmt.close();
+        ResultSet rs;
+        Statement stmt = conn.createStatement();
+        rs = stmt.executeQuery(query);
+        if (rs.next()) {
+            Customer c = new Customer();
+            c.setFirstName(rs.getString("firstname"));
+            c.setLastname(rs.getString("lastname"));
+            c.setEmail(rs.getString("email"));
+            c.setPhone(rs.getString("phone"));
+            customerData.add(c);
         }
+    }
 
-        return cList;
+    public static ArrayList<ShopData> getData() {
+        return customerData;
     }
 }

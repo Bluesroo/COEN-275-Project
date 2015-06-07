@@ -1,5 +1,7 @@
 package databasegui;
 
+import dataabstractions.ShopData;
+
 import java.awt.event.ActionListener;
 
 /**
@@ -9,7 +11,6 @@ public class DatabaseGui{
     final int WINDOW_HEIGHT;
     final int WINDOW_WIDTH;
     private final WindowFrame WINDOW = new WindowFrame();
-    private int fakeArray [];
 
     public DatabaseGui(int width, int height, ActionListener mainListener) {
         WINDOW_WIDTH = width;
@@ -20,7 +21,7 @@ public class DatabaseGui{
         WINDOW.setVisible(true);
     }
 
-    public void updateContent () {
-        WINDOW.setContent(fakeArray);
+    public void updateContent (ShopData data) {
+        WINDOW.setContent(data);
     }
 }
