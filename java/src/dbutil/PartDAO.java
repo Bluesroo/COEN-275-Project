@@ -14,9 +14,9 @@ import java.util.ArrayList;
  * Created by Mugen on 6/7/15.
  */
 public class PartDAO {
-    private ArrayList<ShopData> partData = new ArrayList<>();
+    private static ArrayList<ShopData> partData = new ArrayList<>();
 
-    public void setFromDB(Connection conn, int orderID) throws SQLException{
+    public static void setFromDB(Connection conn, int orderID) throws SQLException{
         String query = "SELECT * FROM orders WHERE o_id = " + orderID;
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
@@ -35,7 +35,7 @@ public class PartDAO {
         }
     }
 
-    public ArrayList<ShopData> getData() {
+    public static ArrayList<ShopData> getData() {
         return partData;
     }
 }

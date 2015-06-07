@@ -49,6 +49,8 @@ public class Order implements ShopData{
         return date;
     }
 
+    public void setDate(Date d) { this.date = d; }
+
     public double getPrice() {
         return price;
     }

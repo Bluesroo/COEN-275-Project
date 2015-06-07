@@ -15,15 +15,13 @@ import java.util.ArrayList;
  * @author David Obatake
  */
 public class OrderDAO {
-    Statement stmt;
+
     private static ArrayList<ShopData> orderData = new ArrayList<>();
 
-    public void setFromDB(Connection conn) throws SQLException{
-        ArrayList<ShopData> oList = new ArrayList<>();
+    public static void setFromDB(Connection conn) throws SQLException{
         String query = "SELECT * FROM orders";
-        ResultSet rs = null;
-        stmt = conn.createStatement();
-        rs = stmt.executeQuery(query);
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
         if(rs.next()) {
             Order o = new Order(rs.getInt("order_id"));
             PartDAO p = new PartDAO();
@@ -31,9 +29,32 @@ public class OrderDAO {
             int numItems = p.getData().size();
             for(int i = 0; i < numItems; i++)
                 o.addItem((Labor) p.getData().get(i));
+            o.setCustomer(CustomerDAO.getSingleFromDB(conn, o.getTag()));
+            o.setDate(rs.getDate("date"));
             orderData.add(o);
         }
     }
+
+    public static ArrayList<Order> getSingleFromDB(Connection conn, int ID) throws SQLException{
+        ArrayList<Order> customerOrders = new ArrayList<>();
+        String query = "SELECT * FROM orders " +
+                "WHERE customer_id = " + ID + ";";
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        if(rs.next()) {
+            Order o = new Order(rs.getInt("order_id"));
+            PartDAO p = new PartDAO();
+            p.setFromDB(conn, o.getTag());
+            int numItems = p.getData().size();
+            for(int i = 0; i < numItems; i++)
+                o.addItem((Labor) p.getData().get(i));
+            o.setCustomer(CustomerDAO.getSingleFromDB(conn, o.getTag()));
+            o.setDate(rs.getDate("date"));
+            customerOrders.add(o);
+        }
+        return customerOrders;
+    }
+
     public static ArrayList<ShopData> getData() {
         return orderData;
     }

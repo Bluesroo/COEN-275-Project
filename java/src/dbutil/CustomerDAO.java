@@ -31,6 +31,25 @@ public class CustomerDAO {
         }
     }
 
+    public static Customer getSingleFromDB(Connection conn, int ID) throws SQLException {
+        String query = "SELECT * FROM customer " +
+                "INNER JOIN orders " +
+                "ON orders.customer_id = customers.ID " +
+                "WHERE orders.order_id = " + ID + ";";
+        ResultSet rs;
+        Statement stmt = conn.createStatement();
+        rs = stmt.executeQuery(query);
+        Customer c = new Customer();
+        if (rs.next()) {
+            c.setFirstName(rs.getString("firstname"));
+            c.setLastname(rs.getString("lastname"));
+            c.setEmail(rs.getString("email"));
+            c.setPhone(rs.getString("phone"));
+        }
+        return c;
+    }
+
+
     public static ArrayList<ShopData> getData() {
         return customerData;
     }
