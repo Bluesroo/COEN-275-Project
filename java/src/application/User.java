@@ -10,7 +10,7 @@ import java.io.FileReader;
  * @author Joseph Pariseau
  */
 final class User {
-    static final private String PATH_TO_CREDENTIALS = "./resources/.credentials";
+    static final private String PATH_TO_CREDENTIALS = "/Users/Mugen/Dev/COEN-275-Project/java/src/resources/.credentials";
 
     static String username() {
         FileReader credentialsFile;

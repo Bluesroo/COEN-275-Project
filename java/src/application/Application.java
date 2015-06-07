@@ -59,6 +59,6 @@ public class Application {
         }
 
         DatabaseGui test = new DatabaseGui(1280, 720);
-        test.run();
+        test.run(1280, 720, );
     }
 }

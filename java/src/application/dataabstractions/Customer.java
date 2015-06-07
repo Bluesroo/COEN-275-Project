@@ -6,29 +6,37 @@ import java.util.ArrayList;
  * @author David Obatake
  */
 public class Customer {
-    private String name;
+    private String firstname;
+    private String lastname;
     private String phone;
     private String email;
     private ArrayList<Order> orders;
 
-    public Customer(String name, String email) {
-        this.name = name;
+    public Customer() {}
+
+    public Customer(String lname, String fname, String email) {
+        this.firstname = fname;
+        this.lastname = lname;
         this.email = email;
         this.orders = new ArrayList<>();
     }
 
-    public Customer(String name, String email, String phone) {
-        this(name, email);
+    public Customer(String lname, String fname, String email, String phone) {
+        this(lname, fname, email);
         this.phone = phone;
     }
 
-    public String getName() {
-        return this.name;
+    public String getFirstName() {
+        return this.firstname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String name) {
+        this.firstname = name;
     }
+
+    public String getLastname() {return this.lastname; }
+
+    public void setLastname(String name) { this.lastname = name; }
 
     public String getEmail() {
         return this.email;
@@ -50,7 +58,8 @@ public class Customer {
     }
 
     public boolean equals(Customer c){
-        if(c.getName().equals(this.name) &&
+        if(c.getFirstName().equals(this.firstname) &&
+                c.getLastname().equals(this.lastname) &&
                 c.getEmail().equals(this.email))
             return true;
 
