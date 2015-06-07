@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * @author David Obatake
  */
-public class Order {
+public class Order implements ShopData{
     private static int tag;
 
     private int orderTag;

@@ -7,14 +7,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import dataabstractions.Customer;
+import dataabstractions.ShopData;
 
 /**
  * Created by Mugen on 6/7/15.
  */
 public class CustomerDAO {
 
-    public ArrayList<Customer> getAllCustomers(Connection conn) throws SQLException{
-        ArrayList<Customer> cList = new ArrayList<>();
+    Statement stmt;
+
+    public ArrayList<ShopData> getAllCustomers(Connection conn) throws SQLException{
+        ArrayList<ShopData> cList = new ArrayList<>();
         String query = "SELECT * FROM customers";
         String orderQuery = "SELECT * FROM orders WHERE ";
         ResultSet rs = null;
@@ -32,6 +35,7 @@ public class CustomerDAO {
 
         } finally {
             rs.close();
+            stmt.close();
         }
 
         return cList;

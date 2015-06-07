@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * @author David Obatake
  */
-public class Customer {
+public class Customer implements ShopData{
     private String firstname;
     private String lastname;
     private String phone;

@@ -3,7 +3,7 @@ package dataabstractions;
 /**
  * @author David Obatake
  */
-public class Labor {
+public class Labor implements ShopData {
     protected String name;
     protected double price;
 
