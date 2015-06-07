@@ -1,0 +1,27 @@
+CREATE TABLE customers
+(
+    lastname VARCHAR(20),
+    firstname VARCHAR(20),
+    email VARCHAR(90),
+    phone VARCHAR(10),
+    ext VARCHAR(10),
+    dateadded TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT
+);
+CREATE TABLE orders
+(
+    order_id INT PRIMARY KEY NOT NULL,
+    customer_id INT NOT NULL
+);
+CREATE TABLE parts
+(
+    parttype VARCHAR(100) NOT NULL,
+    partmanufacturer VARCHAR(100) NOT NULL,
+    price INT NOT NULL,
+    partname VARCHAR(100) NOT NULL,
+    o_id INT NOT NULL
+);
+CREATE UNIQUE INDEX unique_ID ON customers (ID);
+ALTER TABLE orders ADD FOREIGN KEY (customer_id) REFERENCES customers (ID);
+CREATE UNIQUE INDEX unique_ordernumber ON orders (order_id);
+ALTER TABLE parts ADD FOREIGN KEY (o_id) REFERENCES orders (order_id);
