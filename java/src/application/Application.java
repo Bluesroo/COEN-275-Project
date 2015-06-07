@@ -22,6 +22,7 @@ public class Application {
     public static void main(String[] args) {
         Connection conn = null;
         Statement sqlStatement = null;
+        DatabaseGui gui = new DatabaseGui(1280, 720, null);
 
         try {
             //Connects to the database and prepares to issue a statement
@@ -57,8 +58,5 @@ public class Application {
                 se.printStackTrace();
             }
         }
-
-        DatabaseGui test = new DatabaseGui(1280, 720);
-        test.run(1280, 720, );
     }
 }
