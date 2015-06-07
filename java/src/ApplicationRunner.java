@@ -1,6 +1,4 @@
-package application;
-
-import application.databasegui.DatabaseGui;
+import databasegui.DatabaseGui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,4 +1,4 @@
-package application.dataabstractions;
+package dataabstractions;
 
 /**
  * @author David Obatake

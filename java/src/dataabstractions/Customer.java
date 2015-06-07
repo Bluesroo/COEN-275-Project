@@ -1,4 +1,4 @@
-package application.dataabstractions;
+package dataabstractions;
 
 import java.util.ArrayList;
 

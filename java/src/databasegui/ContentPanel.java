@@ -1,9 +1,9 @@
-package application.databasegui;
+package databasegui;
 
-import application.dataabstractions.Customer;
-import application.dataabstractions.Labor;
-import application.dataabstractions.Order;
-import application.dataabstractions.Part;
+import dataabstractions.Customer;
+import dataabstractions.Labor;
+import dataabstractions.Order;
+import dataabstractions.Part;
 
 import javax.swing.*;
 import java.awt.*;

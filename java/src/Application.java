@@ -1,14 +1,3 @@
-package application;
-
-import application.databasegui.DatabaseGui;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 /**
  *
  * Main entry point to the database

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import application.dataabstractions.Customer;
+import dataabstractions.Customer;
 
 /**
  * Created by Mugen on 6/7/15.

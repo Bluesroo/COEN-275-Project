@@ -1,11 +1,10 @@
 package notification;
 
-import java.util.*;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
-import application.dataabstractions.Customer;
+
+import dataabstractions.Customer;
 
 /**
  * @author Mugen on 5/16/15.

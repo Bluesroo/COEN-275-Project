@@ -1,10 +1,9 @@
-package application.dataabstractions;
+package dataabstractions;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import application.dataabstractions.*;
 
 /**
  * @author David Obatake

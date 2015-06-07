@@ -1,4 +1,4 @@
-package application.databasegui;
+package databasegui;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
