@@ -10,11 +10,12 @@ import java.util.ArrayList;
  * @author Joseph Pariseau
  */
 public class ContentPanel extends JPanel {
-    private int columnCount;
-    private int rowCount;
+    private int columnCount = 10;
+    private int rowCount = 0;
 
     ContentPanel() {
         setBackground(Color.BLUE);
+        setLayout(new GridLayout(0, columnCount));
     }
 
     boolean setContent(ArrayList<ShopData> array) {
@@ -37,7 +38,25 @@ public class ContentPanel extends JPanel {
     }
 
     private boolean setCustomers(ArrayList<ShopData> array) {
-        System.out.println(rowCount);
+        if (array.size() < 1) {
+            return false;
+        }
+
+        columnCount = 4;
+        modifyLayout();
+
+        add(new JLabel("Last Name"));
+        add(new JLabel("First Name"));
+        add(new JLabel("Phone Number"));
+        add(new JLabel("Email"));
+
+        for (int i = 0; i < array.size(); i++) {
+            Customer customer = ((Customer) array.get(i));
+            add(new JLabel(customer.getLastname()));
+            add(new JLabel(customer.getFirstName()));
+            add(new JLabel(customer.getPhone()));
+            add(new JLabel(customer.getEmail()));
+        }
         return true;
     }
 
@@ -49,15 +68,7 @@ public class ContentPanel extends JPanel {
         return true;
     }
 
-    private void setColumnCount(Object array) {
-        columnCount = 10;
-        System.out.println(array);
-        System.out.println(columnCount);
-    }
-
-    private void setRowCount(Object array) {
-        rowCount = 10;
-        System.out.println(array);
-        System.out.println(rowCount);
+    private void modifyLayout() {
+        setLayout(new GridLayout(0, columnCount));
     }
 }

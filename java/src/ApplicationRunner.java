@@ -34,6 +34,9 @@ public class ApplicationRunner implements ActionListener {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             sqlStatement = conn.createStatement();
             Class.forName(JDBC_DRIVER);
+
+            ArrayList<ShopData> content = returnDAOData("Customer");
+            gui.updateContent(content);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -62,7 +65,6 @@ public class ApplicationRunner implements ActionListener {
                 System.out.println(DAO);
                 return OrderDAO.getData();
             case "Part":
-
                 System.out.println(DAO);
                 break;
             default:

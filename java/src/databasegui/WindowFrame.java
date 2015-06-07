@@ -36,5 +36,6 @@ public class WindowFrame extends JFrame {
 
     public void setContent(ArrayList<ShopData> data) {
         CONTENT.setContent(data);
+        validate();
     }
 }

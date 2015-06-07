@@ -21,7 +21,7 @@ public class CustomerDAO {
         ResultSet rs;
         Statement stmt = conn.createStatement();
         rs = stmt.executeQuery(query);
-        if (rs.next()) {
+        while (rs.next()) {
             Customer c = new Customer();
             c.setFirstName(rs.getString("firstname"));
             c.setLastname(rs.getString("lastname"));
