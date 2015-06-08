@@ -43,7 +43,6 @@ public class Order implements ShopData{
         this.customer = info;
     }
 
-
     public Date getDate() {
         return date;
     }

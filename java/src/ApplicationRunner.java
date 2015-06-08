@@ -61,12 +61,9 @@ public class ApplicationRunner implements ActionListener {
                 System.out.println(DAO);
                 return CustomerDAO.getData();
             case "Order":
-                orderConnection.setFromDB(conn);
+                OrderDAO.setFromDB(conn);
                 System.out.println(DAO);
                 return OrderDAO.getData();
-            case "Part":
-                System.out.println(DAO);
-                break;
             default:
                 System.out.println("Not a valid action.");
                 break;
@@ -77,6 +74,7 @@ public class ApplicationRunner implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         String action = event.getActionCommand();
+        ArrayList<ShopData> content;
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
@@ -87,8 +85,13 @@ public class ApplicationRunner implements ActionListener {
                 case "Notify":
                     System.out.println(action);
                     break;
-                case "Change View":
-                    ArrayList<ShopData> content = returnDAOData("Customer");
+                case "View Customers":
+                    content = returnDAOData("Customer");
+                    gui.updateContent(content);
+                    System.out.println(action);
+                    break;
+                case "View Orders":
+                    content = returnDAOData("Order");
                     gui.updateContent(content);
                     System.out.println(action);
                     break;

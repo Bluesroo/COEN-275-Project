@@ -14,17 +14,19 @@ import dataabstractions.ShopData;
  */
 public class CustomerDAO {
 
-    private static ArrayList<ShopData> customerData = new ArrayList<>();
+    private static ArrayList<ShopData> customerData;
 
     public static void setFromDB(Connection conn) throws SQLException {
         String query = "SELECT * FROM customers";
         ResultSet rs;
         Statement stmt = conn.createStatement();
         rs = stmt.executeQuery(query);
+        customerData = new ArrayList<>();
+
         while (rs.next()) {
             Customer c = new Customer();
             c.setFirstName(rs.getString("firstname"));
-            c.setLastname(rs.getString("lastname"));
+            c.setLastName(rs.getString("lastname"));
             c.setEmail(rs.getString("email"));
             c.setPhone(rs.getString("phone"));
             customerData.add(c);
@@ -32,7 +34,7 @@ public class CustomerDAO {
     }
 
     public static Customer getSingleFromDB(Connection conn, int ID) throws SQLException {
-        String query = "SELECT * FROM customer " +
+        String query = "SELECT * FROM customers " +
                 "INNER JOIN orders " +
                 "ON orders.customer_id = customers.ID " +
                 "WHERE orders.order_id = " + ID + ";";
@@ -42,7 +44,7 @@ public class CustomerDAO {
         Customer c = new Customer();
         if (rs.next()) {
             c.setFirstName(rs.getString("firstname"));
-            c.setLastname(rs.getString("lastname"));
+            c.setLastName(rs.getString("lastname"));
             c.setEmail(rs.getString("email"));
             c.setPhone(rs.getString("phone"));
         }

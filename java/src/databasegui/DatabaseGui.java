@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * @author Joseph Pariseau
  */
-public class DatabaseGui{
+public class DatabaseGui {
     final protected int WINDOW_HEIGHT;
     final protected int WINDOW_WIDTH;
     private final WindowFrame WINDOW = new WindowFrame();
@@ -22,7 +22,7 @@ public class DatabaseGui{
         WINDOW.setVisible(true);
     }
 
-    public void updateContent (ArrayList<ShopData> data) {
+    public void updateContent(ArrayList<ShopData> data) {
         WINDOW.setContent(data);
     }
 }

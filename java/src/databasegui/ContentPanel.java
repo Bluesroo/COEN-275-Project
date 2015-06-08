@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ContentPanel extends JPanel {
 
     ContentPanel() {
-        setBackground(Color.BLUE);
+        setBackground(Color.WHITE);
     }
 
     boolean setContent(ArrayList<ShopData> array) {
@@ -21,11 +21,11 @@ public class ContentPanel extends JPanel {
         boolean setSuccess;
 
         if (array.get(0) instanceof Customer) {
+            modifyLayout(4);
             setSuccess = setCustomers(array);
         } else if (array.get(0) instanceof Order) {
             setSuccess = setOrders(array);
-        } else if (array.get(0) instanceof Part) {
-            setSuccess = setParts(array);
+            modifyLayout(3);
         } else {
             System.out.println("Trying to display invalid array type.");
             setSuccess = false;
@@ -37,16 +37,15 @@ public class ContentPanel extends JPanel {
         if (array.size() < 1) {
             return false;
         }
-        modifyLayout(4);
 
         add(new JLabel("Last Name"));
         add(new JLabel("First Name"));
         add(new JLabel("Phone Number"));
         add(new JLabel("Email"));
 
-        for (ShopData data: array) {
+        for (ShopData data : array) {
             Customer customer = ((Customer) data);
-            add(new JLabel(customer.getLastname()));
+            add(new JLabel(customer.getLastName()));
             add(new JLabel(customer.getFirstName()));
             add(new JLabel(customer.getPhone()));
             add(new JLabel(customer.getEmail()));
@@ -54,11 +53,21 @@ public class ContentPanel extends JPanel {
         return true;
     }
 
-    private boolean setOrders(Object array) {
-        return false;
-    }
+    private boolean setOrders(ArrayList<ShopData> array) {
+        if (array.size() < 1) {
+            return false;
+        }
 
-    private boolean setParts(Object array) {
+        add(new JLabel("Order Tag"));
+        add(new JLabel("Last Name"));
+        add(new JLabel("First Name"));
+
+        for (ShopData data : array) {
+            Order order = ((Order) data);
+            add(new JLabel("" + order.getTag()));
+            add(new JLabel(order.getCustomer().getLastName()));
+            add(new JLabel(order.getCustomer().getFirstName()));
+        }
         return true;
     }
 

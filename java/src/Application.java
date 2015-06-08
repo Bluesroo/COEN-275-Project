@@ -1,5 +1,4 @@
 /**
- *
  * Main entry point to the database
  *
  * @author Joseph pariseau

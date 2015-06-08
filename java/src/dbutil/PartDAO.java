@@ -14,18 +14,19 @@ import java.util.ArrayList;
  * @author David Obatake
  */
 public class PartDAO {
-    private static ArrayList<ShopData> partData = new ArrayList<>();
+    private static ArrayList<ShopData> partData;
 
-    public static void setFromDB(Connection conn, int orderID) throws SQLException{
+    public static void setFromDB(Connection conn, int orderID) throws SQLException {
         String query = "SELECT * FROM orders WHERE order_id = " + orderID;
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
-        if(rs.next()) {
+        partData = new ArrayList<>();
+
+        if (rs.next()) {
             Labor p;
-            if(rs.getString("parttype").equals("Labor")) {
+            if (rs.getString("parttype").equals("Labor")) {
                 p = new Labor();
-            }
-            else {
+            } else {
                 p = new Part();
                 ((Part) p).setManufacturer(rs.getString("partmanufacturer"));
             }

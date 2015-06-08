@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 /**
- *
  * Simply gets the username and password from the .credentials file.
  *
  * @author Joseph Pariseau

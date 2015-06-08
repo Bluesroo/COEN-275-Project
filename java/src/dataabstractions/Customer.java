@@ -34,9 +34,9 @@ public class Customer implements ShopData{
         this.firstname = name;
     }
 
-    public String getLastname() {return this.lastname; }
+    public String getLastName() {return this.lastname; }
 
-    public void setLastname(String name) { this.lastname = name; }
+    public void setLastName(String name) { this.lastname = name; }
 
     public String getEmail() {
         return this.email;
@@ -58,11 +58,8 @@ public class Customer implements ShopData{
     }
 
     public boolean equals(Customer c){
-        if(c.getFirstName().equals(this.firstname) &&
-                c.getLastname().equals(this.lastname) &&
-                c.getEmail().equals(this.email))
-            return true;
-
-        return false;
+        return c.getFirstName().equals(this.firstname) &&
+                c.getLastName().equals(this.lastname) &&
+                c.getEmail().equals(this.email);
     }
 }
