@@ -6,8 +6,8 @@ import java.util.ArrayList;
  * @author David Obatake
  */
 public class Customer implements ShopData{
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private String phone;
     private String email;
     private ArrayList<Order> orders;
@@ -15,8 +15,8 @@ public class Customer implements ShopData{
     public Customer() {}
 
     public Customer(String lname, String fname, String email) {
-        this.firstname = fname;
-        this.lastname = lname;
+        this.firstName = fname;
+        this.lastName = lname;
         this.email = email;
         this.orders = new ArrayList<>();
     }
@@ -27,16 +27,16 @@ public class Customer implements ShopData{
     }
 
     public String getFirstName() {
-        return this.firstname;
+        return this.firstName;
     }
 
     public void setFirstName(String name) {
-        this.firstname = name;
+        this.firstName = name;
     }
 
-    public String getLastName() {return this.lastname; }
+    public String getLastName() {return this.lastName; }
 
-    public void setLastName(String name) { this.lastname = name; }
+    public void setLastName(String name) { this.lastName = name; }
 
     public String getEmail() {
         return this.email;
@@ -58,8 +58,8 @@ public class Customer implements ShopData{
     }
 
     public boolean equals(Customer c){
-        return c.getFirstName().equals(this.firstname) &&
-                c.getLastName().equals(this.lastname) &&
+        return c.getFirstName().equals(this.firstName) &&
+                c.getLastName().equals(this.lastName) &&
                 c.getEmail().equals(this.email);
     }
 }
