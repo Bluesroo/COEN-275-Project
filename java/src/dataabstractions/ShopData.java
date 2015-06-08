@@ -1,7 +1,7 @@
 package dataabstractions;
 
 /**
- * Created by Mugen on 6/7/15.
+ * @author David Obatake
  */
 public interface ShopData {
 }

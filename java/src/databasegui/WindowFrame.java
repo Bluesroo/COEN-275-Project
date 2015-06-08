@@ -11,9 +11,9 @@ import java.util.ArrayList;
  */
 public class WindowFrame extends JFrame {
     final private JPanel CONTAINER = new JPanel();
-    final ContentPanel CONTENT = new ContentPanel();
-    final JScrollPane CONTENT_SCROLL = new JScrollPane(CONTENT);
-    final ActionPanel ACTION_FRAME = new ActionPanel();
+    final protected ContentPanel CONTENT = new ContentPanel();
+    final protected JScrollPane CONTENT_SCROLL = new JScrollPane(CONTENT);
+    final protected ActionPanel ACTION_FRAME = new ActionPanel();
 
     WindowFrame() {
         setTitle("SCBS Repair Tracker");

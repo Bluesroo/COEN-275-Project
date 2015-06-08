@@ -2,9 +2,10 @@ package dbutil;
 
 import dataabstractions.Labor;
 import dataabstractions.Order;
+import dataabstractions.Part;
 import dataabstractions.ShopData;
 
-import java.lang.reflect.Array;
+import java.lang.reflect.Parameter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,11 +25,10 @@ public class OrderDAO {
         ResultSet rs = stmt.executeQuery(query);
         if(rs.next()) {
             Order o = new Order(rs.getInt("order_id"));
-            PartDAO p = new PartDAO();
-            p.setFromDB(conn, o.getTag());
-            int numItems = p.getData().size();
+            PartDAO.setFromDB(conn, o.getTag());
+            int numItems = PartDAO.getData().size();
             for(int i = 0; i < numItems; i++)
-                o.addItem((Labor) p.getData().get(i));
+                o.addItem((Labor) PartDAO.getData().get(i));
             o.setCustomer(CustomerDAO.getSingleFromDB(conn, o.getTag()));
             o.setDate(rs.getDate("date"));
             orderData.add(o);
@@ -43,11 +43,10 @@ public class OrderDAO {
         ResultSet rs = stmt.executeQuery(query);
         if(rs.next()) {
             Order o = new Order(rs.getInt("order_id"));
-            PartDAO p = new PartDAO();
-            p.setFromDB(conn, o.getTag());
-            int numItems = p.getData().size();
+            PartDAO.setFromDB(conn, o.getTag());
+            int numItems = PartDAO.getData().size();
             for(int i = 0; i < numItems; i++)
-                o.addItem((Labor) p.getData().get(i));
+                o.addItem((Labor) PartDAO.getData().get(i));
             o.setCustomer(CustomerDAO.getSingleFromDB(conn, o.getTag()));
             o.setDate(rs.getDate("date"));
             customerOrders.add(o);

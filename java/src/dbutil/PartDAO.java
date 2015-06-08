@@ -11,17 +11,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Created by Mugen on 6/7/15.
+ * @author David Obatake
  */
 public class PartDAO {
     private static ArrayList<ShopData> partData = new ArrayList<>();
 
     public static void setFromDB(Connection conn, int orderID) throws SQLException{
-        String query = "SELECT * FROM orders WHERE o_id = " + orderID;
+        String query = "SELECT * FROM orders WHERE order_id = " + orderID;
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         if(rs.next()) {
-            Labor p = null;
+            Labor p;
             if(rs.getString("parttype").equals("Labor")) {
                 p = new Labor();
             }

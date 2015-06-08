@@ -9,8 +9,8 @@ import java.util.ArrayList;
  * @author Joseph Pariseau
  */
 public class DatabaseGui{
-    final int WINDOW_HEIGHT;
-    final int WINDOW_WIDTH;
+    final protected int WINDOW_HEIGHT;
+    final protected int WINDOW_WIDTH;
     private final WindowFrame WINDOW = new WindowFrame();
 
     public DatabaseGui(int width, int height, ActionListener mainListener) {

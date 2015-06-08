@@ -1,7 +1,5 @@
 package dataabstractions;
 
-import java.math.BigDecimal;
-
 /**
  * @author David Obatake
  */
