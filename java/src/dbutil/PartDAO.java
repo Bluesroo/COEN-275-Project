@@ -4,10 +4,7 @@ import dataabstractions.Labor;
 import dataabstractions.Part;
 import dataabstractions.ShopData;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 /**
@@ -17,9 +14,10 @@ public class PartDAO {
     private static ArrayList<ShopData> partData;
 
     public static void setFromDB(Connection conn, int orderID) throws SQLException {
-        String query = "SELECT * FROM orders WHERE order_id = " + orderID;
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
+        String query = "SELECT * FROM orders WHERE order_id = ?";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setInt(1, orderID);
+        ResultSet rs = ps.executeQuery(query);
         partData = new ArrayList<>();
 
         if (rs.next()) {
