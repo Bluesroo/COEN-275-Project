@@ -14,7 +14,7 @@ public class Order implements ShopData {
     private Customer customer;
     private Date date;
     private double price;
-    private ArrayList<Labor> items;
+    private ArrayList<ShopData> items;
 
     public Order() {
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -56,26 +56,26 @@ public class Order implements ShopData {
     }
 
     public void updatePrice() {
-        for (Labor l : items) {
+        for (ShopData l : items) {
             // Reset price
             price = 0.0;
             // then add all prices of items together
-            price += l.getPrice();
+            price += ((Labor) l).getPrice();
 
             // @TODO Should we calculate sales tax here?
         }
     }
 
-    public ArrayList<Labor> getItems() {
+    public ArrayList<ShopData> getItems() {
         return items;
     }
 
-    public void addItem(Labor item) {
+    public void addItem(ShopData item) {
         items.add(item);
     }
 
-    public void removeItem(Labor item) {
-        for (Labor l : items) {
+    public void removeItem(ShopData item) {
+        for (ShopData l : items) {
             if (l.equals(item))
                 items.remove(items.indexOf(l));
         }

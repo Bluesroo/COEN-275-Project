@@ -50,9 +50,12 @@ public class PopupDialog {
                 return setNewCustomer();
             case "New Order":
                 return setNewOrder();
+            case "Display Order":
+                return setDisplayOrder();
         }
         return null;
     }
+
 
     public static void setSelectedRow(String row) {
         selectedRow = row;
@@ -60,6 +63,22 @@ public class PopupDialog {
 
     public static void setCurrentState(String state) {
         currentState = state;
+    }
+
+    private static JPanel setDisplayOrder() {
+        JPanel newDisplayPanel = new JPanel();
+
+        if (selectedRow == null || currentState.compareTo("Display Order") != 0) {
+            JLabel warning = new JLabel("You need to select a customer first.");
+            newDisplayPanel.add(warning);
+            return newDisplayPanel;
+        }
+
+        Order display = OrderDAO.getSingleData(Integer.parseInt(selectedRow));
+
+
+
+        return newDisplayPanel;
     }
 
     private static JPanel setNewCustomer() {

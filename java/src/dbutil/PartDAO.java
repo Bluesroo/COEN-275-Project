@@ -19,13 +19,14 @@ public class PartDAO {
         PartDAO.conn = conn;
     }
 
-    public static void setFromDB(int orderID) throws SQLException {
-        String query = "SELECT * FROM orders WHERE order_id = ?";
+    public static void setFromDB(int orderID) {
+        String query = "SELECT * FROM parts WHERE o_id = ?";
         partData = new ArrayList<>();
 
         try {
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, orderID);
+            System.out.println(ps);
             ResultSet rs = ps.executeQuery(query);
 
             if (rs.next()) {
@@ -49,21 +50,22 @@ public class PartDAO {
         return partData;
     }
 
-    public static void insertData(ArrayList<Labor> partList, int orderID) {
+    public static void insertData(ArrayList<ShopData> partList, int orderID) {
         String query = "INSERT INTO parts (parttype, partmanufacturer, price, partname, o_id) " +
                 "VALUES (?,?,?,?,?)";
 
         try {
             for(ShopData sd : partList) {
                 PreparedStatement ps = conn.prepareStatement(query);
-                if(sd instanceof Part) {
+                try {
+                    Part part = (Part) sd;
                     ps.setString(1, "Part");
-                    ps.setString(2, ((Part) sd).getManufacturer());
-                }
-                else {
+                    ps.setString(2, part.getManufacturer());
+                } catch (Exception e) {
                     ps.setString(1, "Labor");
                     ps.setString(2, null);
                 }
+
                 ps.setBigDecimal(3, new BigDecimal(((Labor) sd).getPrice()));
                 ps.setString(4, ((Labor) sd).getName());
                 ps.setInt(5, orderID);

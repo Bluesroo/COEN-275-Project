@@ -34,6 +34,8 @@ public class ApplicationRunner implements ActionListener {
             CustomerDAO.setConnection(conn);
             OrderDAO.setConnection(conn);
             PartDAO.setConnection(conn);
+            CustomerDAO.setFromDB();
+            OrderDAO.setFromDB();
             Class.forName(JDBC_DRIVER);
 
             currentState = "Customer";
