@@ -1,10 +1,7 @@
 package dbutil;
 
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.FieldPosition;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
+import java.text.*;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -65,16 +62,15 @@ public class CustomerDAO {
                 "VALUES (?,?,?,?,?,?);";
 
         try {
-            Statement stmt = conn.createStatement();
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, c.getLastName());
             ps.setString(2, c.getFirstName());
             ps.setString(3, c.getEmail());
             ps.setString(4, c.getPhone());
             ps.setString(5, null);
-            ps.setString(6, new Date().toString());
+            ps.setString(6, df.parse(new Date().toString()).toString());
             ps.executeUpdate();
-        } catch (SQLException se) {
+        } catch (SQLException | ParseException se){
             se.printStackTrace();
         }
     }

@@ -5,12 +5,11 @@ import dataabstractions.Order;
 import dataabstractions.Part;
 import dataabstractions.ShopData;
 
-import java.lang.reflect.Parameter;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * @author David Obatake
@@ -49,5 +48,17 @@ public class OrderDAO {
 
     public static ArrayList<ShopData> getData() {
         return orderData;
+    }
+
+    public static void insertData(Connection conn, Order o) throws SQLException{
+        Statement stmt = conn.createStatement();
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String query = "INSERT INTO orders (order_id, customer_id, date) " +
+                "VALUES (?,?,?);";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, Integer.toString(o.getTag()));
+        ps.setString(2, o.getCustomer().getID());
+        ps.setString(3, new Date().toString());
+        ps.executeUpdate();
     }
 }

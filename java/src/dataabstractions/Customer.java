@@ -19,7 +19,7 @@ public class Customer implements ShopData{
         this.firstName = fname;
         this.lastName = lname;
         this.email = email;
-        this.orders = new ArrayList<>();
+        orders = new ArrayList<>();
     }
 
     public Customer(String lname, String fname, String email, String phone) {
