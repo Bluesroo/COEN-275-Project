@@ -8,25 +8,25 @@ import java.util.Date;
 /**
  * @author David Obatake
  */
-public class Order implements ShopData{
-    private static int tag;
+public class Order implements ShopData {
 
     private int orderTag;
     private Customer customer;
     private Date date;
     private double price;
-    ArrayList<Labor> items;
+    private ArrayList<Labor> items;
 
     public Order() {
-        this.orderTag = tag++;
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         this.date = new Date();
         items = new ArrayList<>();
     }
 
-    public Order(int tag) {this.orderTag = tag; }
+    public Order(int tag) {
+        this.orderTag = tag;
+    }
 
-    public Order(Customer info){
+    public Order(Customer info) {
         this();
         this.customer = info;
     }
@@ -47,14 +47,16 @@ public class Order implements ShopData{
         return date;
     }
 
-    public void setDate(Date d) { this.date = d; }
+    public void setDate(Date d) {
+        this.date = d;
+    }
 
     public double getPrice() {
         return price;
     }
 
     public void updatePrice() {
-        for(Labor l : items) {
+        for (Labor l : items) {
             // Reset price
             price = 0.0;
             // then add all prices of items together
@@ -64,13 +66,17 @@ public class Order implements ShopData{
         }
     }
 
-    public void addItem (Labor item) {
+    public ArrayList<Labor> getItems() {
+        return items;
+    }
+
+    public void addItem(Labor item) {
         items.add(item);
     }
 
-    public void removeItem (Labor item)  {
-        for(Labor l : items) {
-            if(l.equals(item))
+    public void removeItem(Labor item) {
+        for (Labor l : items) {
+            if (l.equals(item))
                 items.remove(items.indexOf(l));
         }
     }

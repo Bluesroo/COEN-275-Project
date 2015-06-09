@@ -65,15 +65,16 @@ public class OrderDAO {
 
     public static void insertData(Order o) {
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String query = "INSERT INTO orders (order_id, customer_id, date) " +
-                "VALUES (?,?,?);";
+        String query = "INSERT INTO orders (customer_id) " +
+                "VALUES (?);";
         try {
             PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, Integer.toString(o.getTag()));
-            ps.setString(2, o.getCustomer().getID());
-            ps.setString(3, df.parse(new Date().toString()).toString());
+            ps.setString(1, o.getCustomer().getID());
+            //ps.setString(3, df.parse(new Date().toString()).toString());
             ps.executeUpdate();
-        } catch (SQLException | ParseException se) {
+            Order orderTag = (Order) orderData.get(orderData.size() - 1);
+            PartDAO.insertData(o.getItems(), orderTag.getTag() + 1);
+        } catch (SQLException se) {
             se.printStackTrace();
         }
     }

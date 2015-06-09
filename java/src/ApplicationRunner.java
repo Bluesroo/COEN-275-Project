@@ -37,6 +37,7 @@ public class ApplicationRunner implements ActionListener {
             Class.forName(JDBC_DRIVER);
 
             currentState = "Customer";
+            PopupDialog.setCurrentState(currentState);
             currentContent = returnDAOData(currentState);
             gui.updateContent(currentContent);
         } catch (Exception e) {
@@ -74,12 +75,14 @@ public class ApplicationRunner implements ActionListener {
                     break;
                 case "View Customers":
                     currentState = "Customer";
+                    PopupDialog.setCurrentState(currentState);
                     currentContent = returnDAOData(currentState);
                     gui.updateContent(currentContent);
                     System.out.println(action);
                     break;
                 case "View Orders":
                     currentState = "Order";
+                    PopupDialog.setCurrentState(currentState);
                     currentContent = returnDAOData(currentState);
                     gui.updateContent(currentContent);
                     System.out.println(action);

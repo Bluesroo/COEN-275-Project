@@ -54,18 +54,18 @@ public class PartDAO {
                 "VALUES (?,?,?,?,?)";
 
         try {
-            for(Labor l : partList) {
+            for(ShopData sd : partList) {
                 PreparedStatement ps = conn.prepareStatement(query);
-                if(l instanceof Part) {
+                if(sd instanceof Part) {
                     ps.setString(1, "Part");
-                    ps.setString(2, ((Part) l).getManufacturer());
+                    ps.setString(2, ((Part) sd).getManufacturer());
                 }
                 else {
                     ps.setString(1, "Labor");
                     ps.setString(2, null);
                 }
-                ps.setBigDecimal(3, new BigDecimal(l.getPrice()));
-                ps.setString(4, l.getName());
+                ps.setBigDecimal(3, new BigDecimal(((Labor) sd).getPrice()));
+                ps.setString(4, ((Labor) sd).getName());
                 ps.setInt(5, orderID);
                 ps.executeUpdate();
             }

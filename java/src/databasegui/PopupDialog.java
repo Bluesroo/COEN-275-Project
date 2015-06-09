@@ -1,13 +1,17 @@
 package databasegui;
 
 import dataabstractions.Customer;
+import dataabstractions.Labor;
 import dataabstractions.Order;
+import dataabstractions.Part;
 import dbutil.CustomerDAO;
+import dbutil.OrderDAO;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * @author Joseph Pariseau
@@ -17,6 +21,7 @@ public class PopupDialog {
     private static Customer lastAddedCustomer;
     private static Order lastAddedOrder;
     private static String selectedRow;
+    private static String currentState;
     final private static JDialog popup = new JDialog();
 
 
@@ -51,6 +56,10 @@ public class PopupDialog {
 
     public static void setSelectedRow(String row) {
         selectedRow = row;
+    }
+
+    public static void setCurrentState(String state) {
+        currentState = state;
     }
 
     private static JPanel setNewCustomer() {
@@ -95,8 +104,9 @@ public class PopupDialog {
 
     private static JPanel setNewOrder() {
         JPanel newOrderPanel = new JPanel();
+        String [] partOptions = {"Labor", "Part"};
 
-        if (selectedRow == null) {
+        if (selectedRow == null || currentState.compareTo("Customer") != 0) {
             JLabel warning = new JLabel("You need to select a customer first.");
             newOrderPanel.add(warning);
             return newOrderPanel;
@@ -104,29 +114,74 @@ public class PopupDialog {
 
         newOrderPanel.setLayout(new GridLayout(0, 2));
 
-        JLabel firstNameLabel = new JLabel("First Name: ");
-        JTextField firstName = new JTextField(20);
-        JLabel lastNameLabel = new JLabel("Last Name: ");
-        JTextField lastName = new JTextField(20);
+        JButton anotherPart = new JButton("Add Part");
+        anotherPart.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event){
+                JLabel partNameLabel = new JLabel("Part name: ");
+                JTextField partName = new JTextField(20);
+                JLabel partManufacturerLabel = new JLabel("Part manufacturer: ");
+                JTextField partManufacturer = new JTextField(20);
+                JLabel priceLabel = new JLabel("Price: ");
+                JTextField price = new JTextField(10);
+                JLabel typeChooseLabel = new JLabel("Type: ");
+                JComboBox typeChoose = new JComboBox(partOptions);
+
+                newOrderPanel.add(typeChooseLabel);
+                newOrderPanel.add(typeChoose);
+                newOrderPanel.add(partNameLabel);
+                newOrderPanel.add(partName);
+                newOrderPanel.add(partManufacturerLabel);
+                newOrderPanel.add(partManufacturer);
+                newOrderPanel.add(priceLabel);
+                newOrderPanel.add(price);
+                newOrderPanel.validate();
+                popup.validate();
+                popup.pack();
+            }
+        });
+        newOrderPanel.add(anotherPart);
 
         JButton addButton = new JButton("Add Order");
+        newOrderPanel.add(addButton);
 
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event){
-                System.out.println(event.getActionCommand());
+                lastAddedOrder = new Order();
+                String type = "Labor";
+
+                Component [] compontentList = newOrderPanel.getComponents();
+                for (int i = 1; i < compontentList.length; i++) {
+                    Component c = compontentList[i];
+                    if (c instanceof JComboBox) {
+                        JComboBox jc = (JComboBox) c;
+                        type = (String) jc.getSelectedItem();
+                    }
+                    i++;
+                    if (type.matches("Labor")) {
+                        i += 3;
+                        String laborName = ((JTextField) compontentList[i]).getText();
+                        i += 4;
+                        double price = Double.parseDouble(((JTextField) compontentList[i]).getText());
+                        lastAddedOrder.addItem(new Labor(laborName, price));
+                    }
+                    else {
+                        i += 3;
+                        String partName = ((JTextField) compontentList[i]).getText();
+                        i += 2;
+                        String partManufacturer = ((JTextField) compontentList[i]).getText();
+                        i += 2;
+                        double price = Double.parseDouble(((JTextField) compontentList[i]).getText());
+                        lastAddedOrder.addItem(new Part(partName, price, partManufacturer));
+                    }
+                }
+
+                lastAddedOrder.setCustomer(CustomerDAO.getSingleData(Integer.parseInt(selectedRow)));
+                System.out.println(lastAddedOrder.getItems().size());
+                OrderDAO.insertData(lastAddedOrder);
+                selectedRow = null;
             }
         });
 
-        newOrderPanel.add(firstNameLabel);
-        newOrderPanel.add(firstName);
-        newOrderPanel.add(lastNameLabel);
-        newOrderPanel.add(lastName);
-        newOrderPanel.add(addButton);
-
-        lastAddedOrder = new Order();
-        lastAddedOrder.setCustomer(CustomerDAO.getSingleData(Integer.parseInt(selectedRow)));
-
-        selectedRow = null;
         return newOrderPanel;
     }
 }
