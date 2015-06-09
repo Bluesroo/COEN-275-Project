@@ -49,9 +49,10 @@ public class PartDAO {
         return partData;
     }
 
-    public static void insertData(Connection conn, ArrayList<Labor> partList, int orderID) {
+    public static void insertData(ArrayList<Labor> partList, int orderID) {
         String query = "INSERT INTO parts (parttype, partmanufacturer, price, partname, o_id) " +
                 "VALUES (?,?,?,?,?)";
+
         try {
             for(Labor l : partList) {
                 PreparedStatement ps = conn.prepareStatement(query);
@@ -71,7 +72,5 @@ public class PartDAO {
         } catch (SQLException se) {
             se.printStackTrace();
         }
-
     }
-
 }

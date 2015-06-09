@@ -20,10 +20,12 @@ public class DatabaseGui {
         WINDOW.setButtonListener(mainListener);
         WINDOW.setContentListener(mainListener);
         WINDOW.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        WINDOW.pack();
         WINDOW.setVisible(true);
     }
 
     public void updateContent(ArrayList<ShopData> data) {
         WINDOW.setContent(data);
+        WINDOW.pack();
     }
 }

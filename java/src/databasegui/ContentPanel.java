@@ -27,7 +27,7 @@ public class ContentPanel extends JPanel {
             setCustomers(array);
         } else if (array.get(0) instanceof Order) {
             setOrders(array);
-            modifyLayout(4);
+            modifyLayout(3);
         } else {
             System.out.println("Trying to display invalid array type.");
         }
@@ -40,7 +40,7 @@ public class ContentPanel extends JPanel {
 
         ButtonGroup group = new ButtonGroup();
 
-        add(new JLabel("Select"));
+        add(new JLabel("Select by Customer ID"));
         add(new JLabel("Last Name"));
         add(new JLabel("First Name"));
         add(new JLabel("Phone Number"));
@@ -85,8 +85,7 @@ public class ContentPanel extends JPanel {
 
         ButtonGroup group = new ButtonGroup();
 
-        add(new JLabel("Select"));
-        add(new JLabel("Order Tag"));
+        add(new JLabel("Select by Order Tag"));
         add(new JLabel("Last Name"));
         add(new JLabel("First Name"));
 
@@ -99,7 +98,6 @@ public class ContentPanel extends JPanel {
             group.add(select);
             select.addActionListener(radioListener);
             add(select);
-            add(new JLabel(orderTag.toString()));
             add(new JLabel(order.getCustomer().getLastName()));
             add(new JLabel(order.getCustomer().getFirstName()));
         }
