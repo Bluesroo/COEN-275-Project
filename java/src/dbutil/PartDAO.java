@@ -13,25 +13,35 @@ import java.util.ArrayList;
  */
 public class PartDAO {
     private static ArrayList<ShopData> partData;
+    private static Connection conn;
 
-    public static void setFromDB(Connection conn, int orderID) throws SQLException {
+    public static void setConnection(Connection conn) {
+        PartDAO.conn = conn;
+    }
+
+    public static void setFromDB(int orderID) throws SQLException {
         String query = "SELECT * FROM orders WHERE order_id = ?";
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setInt(1, orderID);
-        ResultSet rs = ps.executeQuery(query);
         partData = new ArrayList<>();
 
-        if (rs.next()) {
-            Labor p;
-            if (rs.getString("parttype").equals("Labor")) {
-                p = new Labor();
-            } else {
-                p = new Part();
-                ((Part) p).setManufacturer(rs.getString("partmanufacturer"));
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, orderID);
+            ResultSet rs = ps.executeQuery(query);
+
+            if (rs.next()) {
+                Labor p;
+                if (rs.getString("parttype").equals("Labor")) {
+                    p = new Labor();
+                } else {
+                    p = new Part();
+                    ((Part) p).setManufacturer(rs.getString("partmanufacturer"));
+                }
+                p.setName(rs.getString("partname"));
+                p.setPrice(rs.getBigDecimal("price").doubleValue());
+                partData.add(p);
             }
-            p.setName(rs.getString("partname"));
-            p.setPrice(rs.getBigDecimal("price").doubleValue());
-            partData.add(p);
+        } catch (SQLException se) {
+            se.printStackTrace();
         }
     }
 

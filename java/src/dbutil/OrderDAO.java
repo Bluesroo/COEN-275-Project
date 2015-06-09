@@ -18,26 +18,38 @@ import java.util.Date;
 public class OrderDAO {
 
     private static ArrayList<ShopData> orderData;
+    private static Connection conn;
 
-    public static void setFromDB(Connection conn) throws SQLException {
-        String query = "SELECT * FROM orders";
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(query);
-        orderData = new ArrayList<>();
-
-        while (rs.next()) {
-            Order o = new Order(rs.getInt("order_id"));
-            //PartDAO.setFromDB(conn, o.getTag());
-            //int numItems = PartDAO.getData().size();
-            //for (int i = 0; i < numItems; i++)
-            //    o.addItem((Labor) PartDAO.getData().get(i));
-            o.setCustomer(CustomerDAO.getSingleData(o.getTag()));
-            //o.setDate(rs.getDate("date"));
-            orderData.add(o);
-        }
+    public static void setConnection(Connection conn) {
+        OrderDAO.conn = conn;
     }
 
-    public static Order getSingleData(int ID) throws SQLException {
+    public static void setFromDB() {
+        String query = "SELECT * FROM orders";
+        orderData = new ArrayList<>();
+
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Order o = new Order(rs.getInt("order_id"));
+                //PartDAO.setFromDB(conn, o.getTag());
+                //int numItems = PartDAO.getData().size();
+                //for (int i = 0; i < numItems; i++)
+                //    o.addItem((Labor) PartDAO.getData().get(i));
+                o.setCustomer(CustomerDAO.getSingleData(o.getTag()));
+                //o.setDate(rs.getDate("date"));
+                orderData.add(o);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+        System.out.println("Test");
+        System.out.println(orderData);
+    }
+
+    public static Order getSingleData(int ID) {
         for (ShopData i : orderData) {
             Order order = (Order) i;
             if (order.getTag() == ID) {
@@ -51,7 +63,7 @@ public class OrderDAO {
         return orderData;
     }
 
-    public static void insertData(Connection conn, Order o) {
+    public static void insertData(Order o) {
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String query = "INSERT INTO orders (order_id, customer_id, date) " +
                 "VALUES (?,?,?);";

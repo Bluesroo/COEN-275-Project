@@ -26,37 +26,21 @@ public class ApplicationRunner implements ActionListener {
 
     DatabaseGui gui = new DatabaseGui(1280, 720, this);
 
-    public ApplicationRunner() {
-        CustomerDAO.setConnection(conn);
-        // OrderDAO.setConnection(conn);
-        // PartDAO.setConnection(conn);
-    }
-
     void run() {
         Statement sqlStatement = null;
 
         try {
             //Connects to the database and prepares to issue a statement
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            sqlStatement = conn.createStatement();
+            CustomerDAO.setConnection(conn);
+            OrderDAO.setConnection(conn);
+            PartDAO.setConnection(conn);
             Class.forName(JDBC_DRIVER);
 
             ArrayList<ShopData> content = returnDAOData("Customer");
             gui.updateContent(content);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (sqlStatement != null) {
-                    sqlStatement.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            }
-            catch (SQLException se) {
-                se.printStackTrace();
-            }
         }
     }
 
@@ -67,7 +51,7 @@ public class ApplicationRunner implements ActionListener {
                 System.out.println(DAO);
                 return CustomerDAO.getData();
             case "Order":
-                OrderDAO.setFromDB(conn);
+                OrderDAO.setFromDB();
                 System.out.println(DAO);
                 return OrderDAO.getData();
             default:

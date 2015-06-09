@@ -70,11 +70,8 @@ public class PopupDialog {
         JButton addButton = new JButton("Add Customer");
 
         addButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(e.getActionCommand());
-                lastAddedCustomer = new Customer(lastName.getText(), firstName.getText(), email.getText(), phone.getText());
-                System.out.println(lastAddedCustomer.getFirstName());
-                CustomerDAO.insertData(lastAddedCustomer);
+            public void actionPerformed(ActionEvent event){
+                System.out.println(event.getActionCommand());
             }
         });
 
@@ -109,10 +106,19 @@ public class PopupDialog {
         JLabel lastNameLabel = new JLabel("Last Name: ");
         JTextField lastName = new JTextField(20);
 
+        JButton addButton = new JButton("Add Order");
+
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event){
+                System.out.println(event.getActionCommand());
+            }
+        });
+
         newOrderPanel.add(firstNameLabel);
         newOrderPanel.add(firstName);
         newOrderPanel.add(lastNameLabel);
         newOrderPanel.add(lastName);
+        newOrderPanel.add(addButton);
 
         lastAddedOrder = new Order();
         lastAddedOrder.setCustomer(CustomerDAO.getSingleData(Integer.parseInt(selectedRow)));
