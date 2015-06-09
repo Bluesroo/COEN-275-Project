@@ -4,6 +4,7 @@ import dataabstractions.Labor;
 import dataabstractions.Part;
 import dataabstractions.ShopData;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -42,7 +43,21 @@ public class PartDAO {
         String query = "INSERT INTO parts (parttype, partmanufacturer, price, partname, o_id) " +
                 "VALUES (?,?,?,?,?)";
         try {
-            PreparedStatement ps = conn.prepareStatement(query);
+            for(Labor l : partList) {
+                PreparedStatement ps = conn.prepareStatement(query);
+                if(l instanceof Part) {
+                    ps.setString(1, "Part");
+                    ps.setString(2, ((Part) l).getManufacturer());
+                }
+                else {
+                    ps.setString(1, "Labor");
+                    ps.setString(2, null);
+                }
+                ps.setBigDecimal(3, new BigDecimal(l.getPrice()));
+                ps.setString(4, l.getName());
+                ps.setInt(5, orderID);
+                ps.executeUpdate();
+            }
         } catch (SQLException se) {
             se.printStackTrace();
         }
