@@ -2,7 +2,8 @@ package notification;
 
 import java.util.Properties;
 import javax.mail.*;
-import javax.mail.internet.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import dataabstractions.Customer;
 import dbutil.CustomerDAO;

@@ -19,7 +19,7 @@ public class Order implements ShopData{
 
     public Order() {
         this.orderTag = tag++;
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         this.date = new Date();
         items = new ArrayList<>();
     }

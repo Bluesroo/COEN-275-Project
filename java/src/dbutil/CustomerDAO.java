@@ -1,10 +1,12 @@
 package dbutil;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import dataabstractions.Customer;
 import dataabstractions.ShopData;
@@ -55,5 +57,20 @@ public class CustomerDAO {
 
     public static ArrayList<ShopData> getData() {
         return customerData;
+    }
+
+    public static void insertData(Connection conn, Customer c) throws SQLException{
+        Statement stmt = conn.createStatement();
+        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String query = "INSERT INTO customers (lastname, firstname, email, phone, ext, dateadded) " +
+                "VALUES (?,?,?,?,?,?);";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, c.getLastName());
+        ps.setString(2, c.getFirstName());
+        ps.setString(3, c.getEmail());
+        ps.setString(4, c.getPhone());
+        ps.setString(5, null);
+        ps.setString(6, new Date().toString());
+        ps.executeUpdate();
     }
 }
