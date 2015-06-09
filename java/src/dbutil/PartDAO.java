@@ -37,4 +37,16 @@ public class PartDAO {
     public static ArrayList<ShopData> getData() {
         return partData;
     }
+
+    public static void insertData(Connection conn, ArrayList<Labor> partList, int orderID) {
+        String query = "INSERT INTO parts (parttype, partmanufacturer, price, partname, o_id) " +
+                "VALUES (?,?,?,?,?)";
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
+
+    }
+
 }

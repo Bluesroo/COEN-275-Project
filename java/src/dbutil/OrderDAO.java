@@ -7,6 +7,7 @@ import dataabstractions.ShopData;
 
 import java.sql.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,15 +51,18 @@ public class OrderDAO {
         return orderData;
     }
 
-    public static void insertData(Connection conn, Order o) throws SQLException{
-        Statement stmt = conn.createStatement();
+    public static void insertData(Connection conn, Order o) {
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String query = "INSERT INTO orders (order_id, customer_id, date) " +
                 "VALUES (?,?,?);";
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setString(1, Integer.toString(o.getTag()));
-        ps.setString(2, o.getCustomer().getID());
-        ps.setString(3, new Date().toString());
-        ps.executeUpdate();
+        try {
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, Integer.toString(o.getTag()));
+            ps.setString(2, o.getCustomer().getID());
+            ps.setString(3, df.parse(new Date().toString()).toString());
+            ps.executeUpdate();
+        } catch (SQLException | ParseException se) {
+            se.printStackTrace();
+        }
     }
 }
