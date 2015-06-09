@@ -36,8 +36,6 @@ public class PopupDialog {
         popup.pack();
         popup.setLocationRelativeTo(null);
         popup.setVisible(true);
-
-
     }
 
     private static JPanel setContent(String action) {
@@ -71,6 +69,15 @@ public class PopupDialog {
 
         JButton addButton = new JButton("Add Customer");
 
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println(e.getActionCommand());
+                lastAddedCustomer = new Customer(lastName.getText(), firstName.getText(), email.getText(), phone.getText());
+                System.out.println(lastAddedCustomer.getFirstName());
+                CustomerDAO.insertData(lastAddedCustomer);
+            }
+        });
+
         newCustomerPanel.add(firstNameLabel);
         newCustomerPanel.add(firstName);
         newCustomerPanel.add(lastNameLabel);
@@ -82,13 +89,6 @@ public class PopupDialog {
         newCustomerPanel.add(extensionLabel);
         newCustomerPanel.add(extension);
         newCustomerPanel.add(addButton);
-
-        addButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                lastAddedCustomer = new Customer(lastName.getText(), firstName.getText(), email.getText(), phone.getText());
-                CustomerDAO.insertData(lastAddedCustomer);
-            }
-        });
 
         return newCustomerPanel;
     }
@@ -115,12 +115,7 @@ public class PopupDialog {
         newOrderPanel.add(lastName);
 
         lastAddedOrder = new Order();
-
-        try {
-            lastAddedOrder.setCustomer(CustomerDAO.getSingleData(Integer.parseInt(selectedRow)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        lastAddedOrder.setCustomer(CustomerDAO.getSingleData(Integer.parseInt(selectedRow)));
 
         selectedRow = null;
         return newOrderPanel;

@@ -44,7 +44,7 @@ public class CustomerDAO {
         }
     }
 
-    public static Customer getSingleData(int ID) throws SQLException {
+    public static Customer getSingleData(int ID) {
         for (ShopData i : customerData) {
             Customer customer = (Customer) i;
             if (Integer.parseInt(customer.getID()) == ID) {
