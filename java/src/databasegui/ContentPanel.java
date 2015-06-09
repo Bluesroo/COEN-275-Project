@@ -18,28 +18,26 @@ public class ContentPanel extends JPanel {
         setBackground(Color.WHITE);
     }
 
-    boolean setContent(ArrayList<ShopData> array) {
+    void setContent(ArrayList<ShopData> array) {
         removeAll();
-
-        boolean setSuccess;
 
         if (array.get(0) instanceof Customer) {
             modifyLayout(5);
-            setSuccess = setCustomers(array);
+            setCustomers(array);
         } else if (array.get(0) instanceof Order) {
-            setSuccess = setOrders(array);
+            setOrders(array);
             modifyLayout(4);
         } else {
             System.out.println("Trying to display invalid array type.");
-            setSuccess = false;
         }
-        return setSuccess;
     }
 
-    private boolean setCustomers(ArrayList<ShopData> array) {
+    private void setCustomers(ArrayList<ShopData> array) {
         if (array.size() < 1) {
-            return false;
+            return;
         }
+
+        ButtonGroup group = new ButtonGroup();
 
         add(new JLabel("Select"));
         add(new JLabel("Last Name"));
@@ -50,6 +48,7 @@ public class ContentPanel extends JPanel {
         for (ShopData data : array) {
             Customer customer = ((Customer) data);
             JRadioButton select = new JRadioButton(customer.getID());
+            group.add(select);
             select.addActionListener(radioListener);
             add(select);
             add(new JLabel(customer.getLastName()));
@@ -57,25 +56,31 @@ public class ContentPanel extends JPanel {
             add(new JLabel(customer.getPhone()));
             add(new JLabel(customer.getEmail()));
         }
-        return true;
     }
 
-    private boolean setOrders(ArrayList<ShopData> array) {
+    private void setOrders(ArrayList<ShopData> array) {
         if (array.size() < 1) {
-            return false;
+            return;
         }
 
+        ButtonGroup group = new ButtonGroup();
+
+        add(new JLabel("Select"));
         add(new JLabel("Order Tag"));
         add(new JLabel("Last Name"));
         add(new JLabel("First Name"));
 
         for (ShopData data : array) {
             Order order = ((Order) data);
-            add(new JLabel("" + order.getTag()));
+            Integer orderTag = order.getTag();
+            JRadioButton select = new JRadioButton(orderTag.toString());
+            group.add(select);
+            select.addActionListener(radioListener);
+            add(select);
+            add(new JLabel(orderTag.toString()));
             add(new JLabel(order.getCustomer().getLastName()));
             add(new JLabel(order.getCustomer().getFirstName()));
         }
-        return true;
     }
 
     void setContentListener(ActionListener radioListener) {

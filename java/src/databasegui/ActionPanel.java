@@ -13,7 +13,6 @@ public class ActionPanel extends JPanel {
     private JButton viewCustomers = new JButton("View Customers");
     private JButton viewOrders = new JButton("View Orders");
     private JButton notify = new JButton("Notify");
-    //private JButton search = new JButton("Search");
 
     ActionPanel() {
         setBackground(Color.RED);
@@ -23,7 +22,6 @@ public class ActionPanel extends JPanel {
         add(viewCustomers);
         add(viewOrders);
         add(notify);
-        //add(search);
     }
 
     void setActionBarListener(ActionListener mainListener, ActionListener popupListener) {
@@ -32,7 +30,6 @@ public class ActionPanel extends JPanel {
         viewCustomers.addActionListener(mainListener);
         viewOrders.addActionListener(mainListener);
         notify.addActionListener(mainListener);
-        //search.addActionListener(mainListener);
     }
 
     @Override
