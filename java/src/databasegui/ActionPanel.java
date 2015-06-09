@@ -24,9 +24,9 @@ public class ActionPanel extends JPanel {
         add(notify);
     }
 
-    void setActionBarListener(ActionListener mainListener, ActionListener popupListener) {
-        newCustomer.addActionListener(popupListener);
-        newOrder.addActionListener(popupListener);
+    void setActionBarListener(ActionListener mainListener) {
+        newCustomer.addActionListener(mainListener);
+        newOrder.addActionListener(mainListener);
         viewCustomers.addActionListener(mainListener);
         viewOrders.addActionListener(mainListener);
         notify.addActionListener(mainListener);

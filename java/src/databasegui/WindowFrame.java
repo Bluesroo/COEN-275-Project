@@ -30,8 +30,8 @@ public class WindowFrame extends JFrame {
         setContentPane(CONTAINER);
     }
 
-    void setButtonListener(ActionListener mainListener, ActionListener popupListener) {
-        ACTION_FRAME.setActionBarListener(mainListener, popupListener);
+    void setButtonListener(ActionListener mainListener) {
+        ACTION_FRAME.setActionBarListener(mainListener);
     }
 
     void setContentListener(ActionListener radioListener) {

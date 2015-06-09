@@ -1,5 +1,6 @@
 import dataabstractions.ShopData;
 import databasegui.DatabaseGui;
+import databasegui.PopupDialog;
 import dbutil.CustomerDAO;
 import dbutil.OrderDAO;
 import dbutil.PartDAO;
@@ -90,8 +91,12 @@ public class ApplicationRunner implements ActionListener {
                     gui.updateContent(content);
                     System.out.println(action);
                     break;
+                case "New Customer":
+                case "New Order":
+                    PopupDialog.createAndShowDialog(action);
+                    break;
                 default:
-                    System.out.println("Not a valid action.");
+                    PopupDialog.setSelectedRow(action);
                     break;
             }
         } catch (Exception e) {
