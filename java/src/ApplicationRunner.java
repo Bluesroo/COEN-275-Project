@@ -4,6 +4,7 @@ import databasegui.PopupDialog;
 import dbutil.CustomerDAO;
 import dbutil.OrderDAO;
 import dbutil.PartDAO;
+import notification.AutoEmail;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -79,6 +80,7 @@ public class ApplicationRunner implements ActionListener {
 
             switch (action) {
                 case "Notify":
+                    AutoEmail.generateAndSendEmail();
                     System.out.println(action);
                     break;
                 case "View Customers":
@@ -97,6 +99,7 @@ public class ApplicationRunner implements ActionListener {
                     break;
                 default:
                     PopupDialog.setSelectedRow(action);
+                    AutoEmail.setSelectedRow(action);
                     break;
             }
         } catch (Exception e) {

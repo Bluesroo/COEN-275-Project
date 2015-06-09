@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @author Joseph Pariseau
@@ -45,6 +46,8 @@ public class ContentPanel extends JPanel {
         add(new JLabel("Phone Number"));
         add(new JLabel("Email"));
 
+        sortCustomers(array);
+
         for (ShopData data : array) {
             Customer customer = ((Customer) data);
             JRadioButton select = new JRadioButton(customer.getID());
@@ -55,6 +58,23 @@ public class ContentPanel extends JPanel {
             add(new JLabel(customer.getFirstName()));
             add(new JLabel(customer.getPhone()));
             add(new JLabel(customer.getEmail()));
+        }
+    }
+
+    private void sortCustomers(ArrayList<ShopData> array) {
+        int i, j;
+        for (i = 0; i < array.size(); i++) {
+            for (j = i + 1; j < array.size(); j++) {
+                Customer customer1 = ((Customer) array.get(i));
+                Customer customer2 = ((Customer) array.get(j));
+                if (customer1.getLastName().compareTo(customer2.getLastName()) > 0) {
+                    Collections.swap(array, i, j);
+                } else if (customer1.getLastName().compareTo(customer2.getLastName()) == 0) {
+                    if (customer1.getFirstName().compareTo(customer2.getFirstName()) > 0) {
+                        Collections.swap(array, i, j);
+                    }
+                }
+            }
         }
     }
 
@@ -70,6 +90,8 @@ public class ContentPanel extends JPanel {
         add(new JLabel("Last Name"));
         add(new JLabel("First Name"));
 
+        sortOrders(array);
+
         for (ShopData data : array) {
             Order order = ((Order) data);
             Integer orderTag = order.getTag();
@@ -80,6 +102,19 @@ public class ContentPanel extends JPanel {
             add(new JLabel(orderTag.toString()));
             add(new JLabel(order.getCustomer().getLastName()));
             add(new JLabel(order.getCustomer().getFirstName()));
+        }
+    }
+
+    private void sortOrders(ArrayList<ShopData> array) {
+        int i, j;
+        for (i = 0; i < array.size(); i++) {
+            for (j = i + 1; j < array.size(); j++) {
+                Order order1 = ((Order) array.get(i));
+                Order order2 = ((Order) array.get(j));
+                if (order1.getTag() > order2.getTag()) {
+                    Collections.swap(array, i, j);
+                }
+            }
         }
     }
 

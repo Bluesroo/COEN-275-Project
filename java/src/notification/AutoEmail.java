@@ -5,6 +5,7 @@ import javax.mail.*;
 import javax.mail.internet.*;
 
 import dataabstractions.Customer;
+import dbutil.CustomerDAO;
 
 /**
  * @author Mugen on 5/16/15.
@@ -16,8 +17,11 @@ public class AutoEmail {
     static Properties mailServerProperties;
     static Session getMailSession;
     static MimeMessage generateMailMessage;
+    private static String selectedRow;
 
-    public static void generateAndSendEmail(Customer c) throws MessagingException {
+    public static void generateAndSendEmail() throws MessagingException {
+
+        Customer c = new Customer(); //CustomerDAO.getSingleFromDB(null, Integer.parseInt(selectedRow));
 
 //Step1 -- Sends message via TLS
         System.out.println("\n 1st ===> setup Mail Server Properties..");
@@ -47,6 +51,10 @@ public class AutoEmail {
         transport.connect("smtp.gmail.com", "shohei741@gmail.com", "xxxx");
         transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
         transport.close();
+    }
+
+    public static void setSelectedRow(String row) {
+        selectedRow = row;
     }
 
 }

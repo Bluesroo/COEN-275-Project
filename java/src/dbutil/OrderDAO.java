@@ -25,7 +25,7 @@ public class OrderDAO {
         ResultSet rs = stmt.executeQuery(query);
         orderData = new ArrayList<>();
 
-        if (rs.next()) {
+        while (rs.next()) {
             Order o = new Order(rs.getInt("order_id"));
             //PartDAO.setFromDB(conn, o.getTag());
             //int numItems = PartDAO.getData().size();
