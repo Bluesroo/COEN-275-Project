@@ -21,8 +21,12 @@ public class AutoEmail {
     private static String selectedRow;
 
     public static void generateAndSendEmail() throws MessagingException {
-
-        Customer c = new Customer(); //CustomerDAO.getSingleFromDB(null, Integer.parseInt(selectedRow));
+        Customer c = new Customer();
+        try {
+            c = CustomerDAO.getSingleData(Integer.parseInt(selectedRow));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 //Step1 -- Sends message via TLS
         System.out.println("\n 1st ===> setup Mail Server Properties..");
@@ -37,7 +41,6 @@ public class AutoEmail {
         getMailSession = Session.getDefaultInstance(mailServerProperties, null);
         generateMailMessage = new MimeMessage(getMailSession);
         generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(c.getEmail()));
-        //generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("jpariseau101@gmail.com"));
 
         // @TODO need to check what the email message should be -- May need to include the invoice as an attachment
         generateMailMessage.setSubject("Your repair is ready for pickup");
