@@ -2,14 +2,14 @@ package databasegui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
  * @author Joseph Pariseau
  */
 public class ActionPanel extends JPanel {
-    private JButton newEntry = new JButton("New Entry");
+    private JButton newCustomer = new JButton("New Customer");
+    private JButton newOrder = new JButton("New Order");
     private JButton viewCustomers = new JButton("View Customers");
     private JButton viewOrders = new JButton("View Orders");
     private JButton notify = new JButton("Notify");
@@ -18,15 +18,17 @@ public class ActionPanel extends JPanel {
     ActionPanel() {
         setBackground(Color.RED);
 
-        add(newEntry);
+        add(newCustomer);
+        add(newOrder);
         add(viewCustomers);
         add(viewOrders);
         add(notify);
         //add(search);
     }
 
-    void setActionBarListeners(ActionListener mainListener) {
-        newEntry.addActionListener(mainListener);
+    void setActionBarListener(ActionListener mainListener, ActionListener popupListener) {
+        newCustomer.addActionListener(popupListener);
+        newOrder.addActionListener(popupListener);
         viewCustomers.addActionListener(mainListener);
         viewOrders.addActionListener(mainListener);
         notify.addActionListener(mainListener);

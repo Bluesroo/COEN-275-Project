@@ -4,12 +4,15 @@ import dataabstractions.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
  * @author Joseph Pariseau
  */
 public class ContentPanel extends JPanel {
+
+    ActionListener radioListener;
 
     ContentPanel() {
         setBackground(Color.WHITE);
@@ -21,11 +24,11 @@ public class ContentPanel extends JPanel {
         boolean setSuccess;
 
         if (array.get(0) instanceof Customer) {
-            modifyLayout(4);
+            modifyLayout(5);
             setSuccess = setCustomers(array);
         } else if (array.get(0) instanceof Order) {
             setSuccess = setOrders(array);
-            modifyLayout(3);
+            modifyLayout(4);
         } else {
             System.out.println("Trying to display invalid array type.");
             setSuccess = false;
@@ -38,6 +41,7 @@ public class ContentPanel extends JPanel {
             return false;
         }
 
+        add(new JLabel("Select"));
         add(new JLabel("Last Name"));
         add(new JLabel("First Name"));
         add(new JLabel("Phone Number"));
@@ -45,6 +49,9 @@ public class ContentPanel extends JPanel {
 
         for (ShopData data : array) {
             Customer customer = ((Customer) data);
+            JRadioButton select = new JRadioButton(customer.getID());
+            select.addActionListener(radioListener);
+            add(select);
             add(new JLabel(customer.getLastName()));
             add(new JLabel(customer.getFirstName()));
             add(new JLabel(customer.getPhone()));
@@ -69,6 +76,10 @@ public class ContentPanel extends JPanel {
             add(new JLabel(order.getCustomer().getFirstName()));
         }
         return true;
+    }
+
+    void setContentListener(ActionListener radioListener) {
+        this.radioListener = radioListener;
     }
 
     private void modifyLayout(int columnCount) {

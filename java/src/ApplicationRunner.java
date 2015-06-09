@@ -23,8 +23,6 @@ public class ApplicationRunner implements ActionListener {
     private Connection conn;
 
     DatabaseGui gui = new DatabaseGui(1280, 720, this);
-    OrderDAO orderConnection = new OrderDAO();
-    PartDAO partConnection = new PartDAO();
 
     void run() {
         Statement sqlStatement = null;
@@ -79,9 +77,6 @@ public class ApplicationRunner implements ActionListener {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
             switch (action) {
-                case "New Entry":
-                    System.out.println(action);
-                    break;
                 case "Notify":
                     System.out.println(action);
                     break;

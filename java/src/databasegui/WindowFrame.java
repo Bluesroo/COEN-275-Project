@@ -30,8 +30,12 @@ public class WindowFrame extends JFrame {
         setContentPane(CONTAINER);
     }
 
-    void setActionListeners(ActionListener mainListener) {
-        ACTION_FRAME.setActionBarListeners(mainListener);
+    void setButtonListener(ActionListener mainListener, ActionListener popupListener) {
+        ACTION_FRAME.setActionBarListener(mainListener, popupListener);
+    }
+
+    void setContentListener(ActionListener radioListener) {
+        CONTENT.setContentListener(radioListener);
     }
 
     public void setContent(ArrayList<ShopData> data) {

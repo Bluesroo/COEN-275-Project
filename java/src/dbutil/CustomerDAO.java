@@ -29,6 +29,7 @@ public class CustomerDAO {
             c.setLastName(rs.getString("lastname"));
             c.setEmail(rs.getString("email"));
             c.setPhone(rs.getString("phone"));
+            c.setID(rs.getString("ID"));
             customerData.add(c);
         }
     }

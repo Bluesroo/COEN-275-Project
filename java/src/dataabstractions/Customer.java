@@ -10,6 +10,7 @@ public class Customer implements ShopData{
     private String lastName;
     private String phone;
     private String email;
+    private String id;
     private ArrayList<Order> orders;
 
     public Customer() {}
@@ -55,6 +56,14 @@ public class Customer implements ShopData{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getID() {
+        return this.id;
+    }
+
+    public void setID(String id) {
+        this.id = id;
     }
 
     public boolean equals(Customer c){
