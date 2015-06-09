@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -24,21 +23,22 @@ public class ApplicationRunner implements ActionListener {
     static final String PASS = User.password();
     private Connection conn;
 
+    private String currentState;
+    private ArrayList<ShopData> currentContent;
+
     DatabaseGui gui = new DatabaseGui(1280, 720, this);
 
     void run() {
-        Statement sqlStatement = null;
-
         try {
-            //Connects to the database and prepares to issue a statement
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             CustomerDAO.setConnection(conn);
             OrderDAO.setConnection(conn);
             PartDAO.setConnection(conn);
             Class.forName(JDBC_DRIVER);
 
-            ArrayList<ShopData> content = returnDAOData("Customer");
-            gui.updateContent(content);
+            currentState = "Customer";
+            currentContent = returnDAOData(currentState);
+            gui.updateContent(currentContent);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,7 +64,6 @@ public class ApplicationRunner implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent event) {
         String action = event.getActionCommand();
-        ArrayList<ShopData> content;
         try {
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
@@ -74,18 +73,24 @@ public class ApplicationRunner implements ActionListener {
                     System.out.println(action);
                     break;
                 case "View Customers":
-                    content = returnDAOData("Customer");
-                    gui.updateContent(content);
+                    currentState = "Customer";
+                    currentContent = returnDAOData(currentState);
+                    gui.updateContent(currentContent);
                     System.out.println(action);
                     break;
                 case "View Orders":
-                    content = returnDAOData("Order");
-                    gui.updateContent(content);
+                    currentState = "Order";
+                    currentContent = returnDAOData(currentState);
+                    gui.updateContent(currentContent);
                     System.out.println(action);
                     break;
                 case "New Customer":
                 case "New Order":
                     PopupDialog.createAndShowDialog(action);
+                    break;
+                case "Update":
+                    currentContent = returnDAOData(currentState);
+                    gui.updateContent(currentContent);
                     break;
                 default:
                     PopupDialog.setSelectedRow(action);

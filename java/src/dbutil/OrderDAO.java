@@ -37,7 +37,7 @@ public class OrderDAO {
                 //int numItems = PartDAO.getData().size();
                 //for (int i = 0; i < numItems; i++)
                 //    o.addItem((Labor) PartDAO.getData().get(i));
-                o.setCustomer(CustomerDAO.getSingleData(o.getTag()));
+                o.setCustomer(CustomerDAO.getSingleData(rs.getInt("customer_id")));
                 //o.setDate(rs.getDate("date"));
                 orderData.add(o);
             }

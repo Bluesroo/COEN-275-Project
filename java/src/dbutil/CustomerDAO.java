@@ -57,9 +57,8 @@ public class CustomerDAO {
     }
 
     public static void insertData(Customer c) {
-        DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String query = "INSERT INTO customers (lastname, firstname, email, phone, ext, dateadded) " +
-                "VALUES (?,?,?,?,?,?);";
+        String query = "INSERT INTO customers (lastname, firstname, email, phone, ext) " +
+                "VALUES (?,?,?,?,?);";
 
         try {
             PreparedStatement ps = conn.prepareStatement(query);
@@ -68,9 +67,8 @@ public class CustomerDAO {
             ps.setString(3, c.getEmail());
             ps.setString(4, c.getPhone());
             ps.setString(5, null);
-            ps.setString(6, df.parse(new Date().toString()).toString());
             ps.executeUpdate();
-        } catch (SQLException | ParseException se){
+        } catch (SQLException se){
             se.printStackTrace();
         }
     }

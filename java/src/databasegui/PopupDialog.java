@@ -17,12 +17,13 @@ public class PopupDialog {
     private static Customer lastAddedCustomer;
     private static Order lastAddedOrder;
     private static String selectedRow;
+    final private static JDialog popup = new JDialog();
+
 
     private PopupDialog() {
     }
 
     public static void createAndShowDialog(final String action){
-        final JDialog popup = new JDialog();
         popup.setLayout(new BorderLayout());
 
         JPanel contentPanel = setContent(action);
@@ -72,6 +73,8 @@ public class PopupDialog {
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event){
                 System.out.println(event.getActionCommand());
+                CustomerDAO.insertData(new Customer(lastName.getText(), firstName.getText(), email.getText(), phone.getText()));
+                popup.dispose();
             }
         });
 
