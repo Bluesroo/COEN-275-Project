@@ -17,22 +17,30 @@ import dataabstractions.ShopData;
 public class CustomerDAO {
 
     private static ArrayList<ShopData> customerData;
+    private static Connection conn;
 
-    public static void setFromDB(Connection conn) throws SQLException {
+    public static void setConnection(Connection conn) {
+        CustomerDAO.conn = conn;
+    }
+
+    public static void setFromDB() {
         String query = "SELECT * FROM customers";
-        ResultSet rs;
-        Statement stmt = conn.createStatement();
-        rs = stmt.executeQuery(query);
         customerData = new ArrayList<>();
 
-        while (rs.next()) {
-            Customer c = new Customer();
-            c.setFirstName(rs.getString("firstname"));
-            c.setLastName(rs.getString("lastname"));
-            c.setEmail(rs.getString("email"));
-            c.setPhone(rs.getString("phone"));
-            c.setID(rs.getString("ID"));
-            customerData.add(c);
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Customer c = new Customer();
+                c.setFirstName(rs.getString("firstname"));
+                c.setLastName(rs.getString("lastname"));
+                c.setEmail(rs.getString("email"));
+                c.setPhone(rs.getString("phone"));
+                c.setID(rs.getString("ID"));
+                customerData.add(c);
+            }
+        } catch (SQLException se) {
+            se.printStackTrace();
         }
     }
 
@@ -51,18 +59,23 @@ public class CustomerDAO {
         return customerData;
     }
 
-    public static void insertData(Connection conn, Customer c) throws SQLException{
-        Statement stmt = conn.createStatement();
+    public static void insertData(Customer c) {
         DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String query = "INSERT INTO customers (lastname, firstname, email, phone, ext, dateadded) " +
                 "VALUES (?,?,?,?,?,?);";
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setString(1, c.getLastName());
-        ps.setString(2, c.getFirstName());
-        ps.setString(3, c.getEmail());
-        ps.setString(4, c.getPhone());
-        ps.setString(5, null);
-        ps.setString(6, new Date().toString());
-        ps.executeUpdate();
+
+        try {
+            Statement stmt = conn.createStatement();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, c.getLastName());
+            ps.setString(2, c.getFirstName());
+            ps.setString(3, c.getEmail());
+            ps.setString(4, c.getPhone());
+            ps.setString(5, null);
+            ps.setString(6, new Date().toString());
+            ps.executeUpdate();
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
     }
 }

@@ -86,6 +86,7 @@ public class PopupDialog {
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 lastAddedCustomer = new Customer(lastName.getText(), firstName.getText(), email.getText(), phone.getText());
+                CustomerDAO.insertData(lastAddedCustomer);
             }
         });
 
@@ -114,7 +115,12 @@ public class PopupDialog {
         newOrderPanel.add(lastName);
 
         lastAddedOrder = new Order();
-        // lastAddedOrder.setCustomer(CustomerDAO.getSingleFromDB(selectedRow));
+
+        try {
+            lastAddedOrder.setCustomer(CustomerDAO.getSingleData(Integer.parseInt(selectedRow)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         selectedRow = null;
         return newOrderPanel;

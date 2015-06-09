@@ -26,6 +26,12 @@ public class ApplicationRunner implements ActionListener {
 
     DatabaseGui gui = new DatabaseGui(1280, 720, this);
 
+    public ApplicationRunner() {
+        CustomerDAO.setConnection(conn);
+        // OrderDAO.setConnection(conn);
+        // PartDAO.setConnection(conn);
+    }
+
     void run() {
         Statement sqlStatement = null;
 
@@ -57,7 +63,7 @@ public class ApplicationRunner implements ActionListener {
     private ArrayList<ShopData> returnDAOData(String DAO) throws SQLException {
         switch (DAO) {
             case "Customer":
-                CustomerDAO.setFromDB(conn);
+                CustomerDAO.setFromDB();
                 System.out.println(DAO);
                 return CustomerDAO.getData();
             case "Order":
